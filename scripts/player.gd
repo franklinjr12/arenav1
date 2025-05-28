@@ -1,12 +1,14 @@
 extends CharacterBody2D
+class_name Player
 
 @export var SPEED = 300.0
 @export var player_distance = 20
 
 @onready var basic_spell = preload("res://scenes/basic_spell.tscn")
 
-var target_position : Vector2 = Vector2.ZERO
-var position_threshold = 20
+var health_points: int = 10
+var target_position: Vector2 = Vector2.ZERO
+var position_threshold: int = 20
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("q_action"):
@@ -21,6 +23,12 @@ func _physics_process(delta: float) -> void:
 	if (position - target_position).length_squared() < position_threshold:
 		velocity = Vector2.ZERO
 	move_and_slide()
+
+
+func suffer_damage(number: int):
+	health_points -= number
+	if health_points <= 0:
+		queue_free()
 
 
 func trigger_action_q(direction: Vector2):

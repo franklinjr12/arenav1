@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cotssc72bpfg"]
+[gd_scene load_steps=6 format=3 uid="uid://cotssc72bpfg"]
 
+[ext_resource type="Script" uid="uid://br5lf5cq1muef" path="res://scripts/game.gd" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://bh7ryb0mb3rh0" path="res://scenes/player.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://bpoof3cfbppe7" path="res://scripts/arena_camera.gd" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://chbf47bmcasnt" path="res://sprites/battle_arena.png" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://b6ydjnhhpafm0" path="res://scenes/enemy.tscn" id="5_iywne"]
 
 [node name="Game" type="Node2D" groups=["Game"]]
+script = ExtResource("1_iywne")
 
 [node name="Player" parent="." instance=ExtResource("1_lbhrr")]
 position = Vector2(196, 197)

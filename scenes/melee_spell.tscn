@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpiqdllq5i4td"]
+
+[ext_resource type="Texture2D" uid="uid://b5eanytpl3ckh" path="res://sprites/basic_attack_spell.png" id="1_xm724"]
+[ext_resource type="Script" uid="uid://dnrgfkhf6gaid" path="res://scripts/melee_spell.gd" id="2_xm724"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfbgh"]
+size = Vector2(20, 40)
+
+[node name="Sprite2D" type="Sprite2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_xm724")
+script = ExtResource("2_xm724")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1.78814e-06)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_qfbgh")
+
+[node name="DeletionTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="DeletionTimer" to="." method="_on_deletion_timer_timeout"]
