@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6ydjnhhpafm0"]
+[gd_scene load_steps=4 format=3 uid="uid://b6ydjnhhpafm0"]
 
 [ext_resource type="Texture2D" uid="uid://br75vfgdxlc2j" path="res://sprites/ugly_rat.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://dgvd6oob2rpem" path="res://scripts/enemy.gd" id="1_md0e3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md0e3"]
 radius = 5.0
 height = 20.0
 
 [node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_md0e3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7p1mj")

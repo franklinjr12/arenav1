@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var SPEED = 300.0
+@export var player_distance = 20
 
 @onready var basic_spell = preload("res://scenes/basic_spell.tscn")
 
@@ -9,7 +10,7 @@ var position_threshold = 20
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("q_action"):
-		trigger_action_q((get_global_mouse_position() - position))
+		trigger_action_q((get_global_mouse_position() - position).normalized())
 
 
 func _physics_process(delta: float) -> void:
@@ -25,8 +26,8 @@ func _physics_process(delta: float) -> void:
 func trigger_action_q(direction: Vector2):
 	if $QActionTimer.is_stopped():
 		var action = basic_spell.instantiate()
-		action.position = position
-		action.set_direction(direction.normalized())
+		action.position = position + direction * player_distance
+		action.set_direction(direction)
 		# TODO should check if is in arena
 		get_tree().get_first_node_in_group("Game").add_child(action)
 		$QActionTimer.start()
