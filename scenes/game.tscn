@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cotssc72bpfg"]
+
+[ext_resource type="Texture2D" uid="uid://b78hp7i3kabrq" path="res://sprites/sticky.png" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://cxalnlsqejr3s" path="res://scripts/player.gd" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://bpoof3cfbppe7" path="res://scripts/arena_camera.gd" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://chbf47bmcasnt" path="res://sprites/battle_arena.png" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://b6ydjnhhpafm0" path="res://scenes/enemy.tscn" id="5_iywne"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
+size = Vector2(5, 21)
+
+[node name="Game" type="Node2D" groups=["Game"]]
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(196, 197)
+script = ExtResource("1_yqjtg")
+SPEED = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture_filter = 1
+position = Vector2(2, -3)
+texture = ExtResource("1_uwrxv")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_yqjtg")
+metadata/_edit_lock_ = true
+
+[node name="QActionTimer" type="Timer" parent="Player"]
+one_shot = true
+
+[node name="ArenaCamera" type="Camera2D" parent="."]
+position = Vector2(195, 194)
+zoom = Vector2(2, 2)
+script = ExtResource("3_lnu2h")
+
+[node name="BackgroundArenaSprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(577.5, 323)
+scale = Vector2(1.12402, 0.630859)
+texture = ExtResource("4_lbhrr")
+
+[node name="Enemy" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(435, 292)
