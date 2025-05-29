@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0na05ielvvyx"]
+
+[ext_resource type="Texture2D" uid="uid://5x2d7vwm1hco" path="res://sprites/basic_spell.png" id="1_lkc3m"]
+[ext_resource type="Script" uid="uid://ic2a6v1m65w1" path="res://scripts/area_spell.gd" id="2_lkc3m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lks56"]
+radius = 5.0
+
+[node name="Sprite2D" type="Sprite2D"]
+scale = Vector2(5, 5)
+texture = ExtResource("1_lkc3m")
+script = ExtResource("2_lkc3m")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_lks56")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="LifetimeTimer" to="." method="_on_timer_timeout"]

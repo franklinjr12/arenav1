@@ -9,7 +9,6 @@ height = 25.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_g2els")
-SPEED = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -26,3 +25,13 @@ one_shot = true
 
 [node name="WActionTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="EActionTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="RActionTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="EActionTimer" to="." method="_on_e_action_timer_timeout"]

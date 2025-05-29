@@ -9,7 +9,7 @@ var should_chase = false
 @export var chase_range = 300
 @export var speed_multiplier = 2500
 
-func _process(delta: float):
+func _process(_delta: float):
 	var player: Player = get_player()
 	if player != null:
 		var distance = player.position - position
