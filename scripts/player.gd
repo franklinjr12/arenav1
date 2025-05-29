@@ -38,4 +38,7 @@ func trigger_action_q(direction: Vector2):
 		action.set_direction(direction)
 		# TODO should check if is in arena
 		get_tree().get_first_node_in_group("Game").add_child(action)
+		var q_ui = get_tree().get_first_node_in_group("PlayerSpellsUi").get_node("HBoxContainer/SpellQ")
+		q_ui.get_node("Timer").wait_time = $QActionTimer.wait_time
+		q_ui.start_cooldown()
 		$QActionTimer.start()
