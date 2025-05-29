@@ -23,3 +23,6 @@ metadata/_edit_lock_ = true
 
 [node name="QActionTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="WActionTimer" type="Timer" parent="."]
+one_shot = true
