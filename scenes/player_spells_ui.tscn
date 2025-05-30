@@ -38,6 +38,7 @@ script = ExtResource("2_rbq1j")
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer/SpellW"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(1, 0, 0, 0.670588)
@@ -52,6 +53,7 @@ script = ExtResource("2_rbq1j")
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer/SpellE"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(1, 0, 0, 0.670588)
@@ -66,6 +68,7 @@ script = ExtResource("2_rbq1j")
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer/SpellR"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(1, 0, 0, 0.670588)

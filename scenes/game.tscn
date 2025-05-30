@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cotssc72bpfg"]
+[gd_scene load_steps=8 format=3 uid="uid://cotssc72bpfg"]
 
 [ext_resource type="Script" uid="uid://br5lf5cq1muef" path="res://scripts/game.gd" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://bh7ryb0mb3rh0" path="res://scenes/player.tscn" id="1_lbhrr"]
@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://chbf47bmcasnt" path="res://sprites/battle_arena.png" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://biufh30s7k4is" path="res://scenes/player_spells_ui.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b6ydjnhhpafm0" path="res://scenes/enemy.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="5_u5sy4"]
 
 [node name="Game" type="Node2D" groups=["Game"]]
 script = ExtResource("1_iywne")
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_lbhrr")]
 position = Vector2(196, 197)
@@ -29,11 +31,24 @@ offset_bottom = 119.0
 grow_horizontal = 1
 grow_vertical = 1
 
+[node name="PlayerHealthBar" parent="ArenaCamera" groups=["PlayerHealthBar"] instance=ExtResource("5_u5sy4")]
+offset_left = -280.0
+offset_top = 116.0
+offset_right = -280.0
+offset_bottom = 116.0
+
 [node name="BackgroundArenaSprite" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(577.5, 323)
 scale = Vector2(1.12402, 0.630859)
 texture = ExtResource("4_lbhrr")
+metadata/_edit_lock_ = true
 
 [node name="Enemy" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(435, 292)
+position = Vector2(606, 476)
+
+[node name="Enemy2" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(1051, 288)
+
+[node name="Enemy3" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(600, 116)

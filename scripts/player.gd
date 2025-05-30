@@ -14,6 +14,12 @@ var should_blink = false
 var blink_distance = 100
 var shield_on = false
 
+func _ready() -> void:
+	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
+	if health_bar != null:
+		health_bar.set_max(health_points)
+		health_bar.set_current(health_points)
+
 func _process(_delta: float) -> void:
 	var dir = (get_global_mouse_position() - position).normalized()
 	if Input.is_action_pressed("q_action"):
@@ -49,6 +55,9 @@ func suffer_damage(number: int):
 	health_points -= number
 	if health_points <= 0:
 		queue_free()
+	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
+	if health_bar != null:
+		health_bar.set_current(health_points)
 
 
 func trigger_spell_cooldown(spell: String):

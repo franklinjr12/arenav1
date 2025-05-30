@@ -9,6 +9,11 @@ var should_chase = false
 @export var chase_range = 300
 @export var speed_multiplier = 2500
 
+func _ready() -> void:
+	$HealthBar.set_current(health_points)
+	$HealthBar.set_max(health_points)
+
+
 func _process(_delta: float):
 	var player: Player = get_player()
 	if player != null:
@@ -41,6 +46,7 @@ func suffer_damage(number: int):
 	health_points -= number
 	if health_points <= 0:
 		queue_free()
+	$HealthBar.set_current(health_points)
 
 
 func get_player():
