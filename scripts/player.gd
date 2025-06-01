@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal died
+
 @export var SPEED = 4000.0
 @export var player_distance = 20
 
@@ -54,6 +56,7 @@ func suffer_damage(number: int):
 		return
 	health_points -= number
 	if health_points <= 0:
+		died.emit()
 		queue_free()
 	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
 	if health_bar != null:

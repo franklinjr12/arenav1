@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cotssc72bpfg"]
+[gd_scene load_steps=9 format=3 uid="uid://cotssc72bpfg"]
 
 [ext_resource type="Script" uid="uid://br5lf5cq1muef" path="res://scripts/game.gd" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://bh7ryb0mb3rh0" path="res://scenes/player.tscn" id="1_lbhrr"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://biufh30s7k4is" path="res://scenes/player_spells_ui.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b6ydjnhhpafm0" path="res://scenes/enemy.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="5_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://bnhn0dj7amqc1" path="res://scenes/arena_end_ui.tscn" id="6_gee14"]
 
 [node name="Game" type="Node2D" groups=["Game"]]
 script = ExtResource("1_iywne")
@@ -37,6 +38,13 @@ offset_top = 116.0
 offset_right = -280.0
 offset_bottom = 116.0
 
+[node name="ArenaEndUi" parent="ArenaCamera" instance=ExtResource("6_gee14")]
+visible = false
+offset_left = -22.0
+offset_top = -83.0
+offset_right = -22.0
+offset_bottom = -83.0
+
 [node name="BackgroundArenaSprite" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(577.5, 323)
@@ -47,8 +55,8 @@ metadata/_edit_lock_ = true
 [node name="Enemy" parent="." instance=ExtResource("5_iywne")]
 position = Vector2(606, 476)
 
-[node name="Enemy2" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(1051, 288)
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2(126, 276)
 
-[node name="Enemy3" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(600, 116)
+[node name="EnemySpawn" type="Node2D" parent="."]
+position = Vector2(603, 478)

@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Enemy
 
+signal died
+
 @onready var melee_spell = preload("res://scenes/melee_spell.tscn")
 
 var health_points = 5
@@ -45,6 +47,7 @@ func _physics_process(delta: float) -> void:
 func suffer_damage(number: int):
 	health_points -= number
 	if health_points <= 0:
+		died.emit()
 		queue_free()
 	$HealthBar.set_current(health_points)
 

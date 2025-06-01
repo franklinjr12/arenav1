@@ -21,6 +21,7 @@ player=""
 Game=""
 PlayerSpellsUi=""
 PlayerHealthBar=""
+Enemy=""
 
 [input]
 
