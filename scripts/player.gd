@@ -46,8 +46,10 @@ func _physics_process(delta: float) -> void:
 		var mouse_pos = get_global_mouse_position()
 		target_position = mouse_pos
 		velocity = (mouse_pos - position).normalized() * SPEED * delta
+		$AnimationPlayer.play("player_move_animation")
 	if (position - target_position).length_squared() < position_threshold:
 		velocity = Vector2.ZERO
+		$AnimationPlayer.stop()
 	move_and_slide()
 
 

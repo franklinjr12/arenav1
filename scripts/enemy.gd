@@ -39,8 +39,10 @@ func _physics_process(delta: float) -> void:
 		if player != null:
 			var distance = player.position - position
 			velocity = distance.normalized() * speed_multiplier * delta
+			$AnimationPlayer.play("enemy_move_animation")
 	else:
 		velocity = Vector2.ZERO
+		$AnimationPlayer.stop()
 	move_and_slide()
 
 
