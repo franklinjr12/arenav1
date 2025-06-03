@@ -4,12 +4,13 @@ class_name Enemy
 signal died
 
 @onready var melee_spell = preload("res://scenes/melee_spell.tscn")
+@export var chase_range: int = 300
+@export var speed_multiplier: int = 2500
 
-var health_points = 5
-var attack_range = 30
-var should_chase = false
-@export var chase_range = 300
-@export var speed_multiplier = 2500
+var health_points: float = 5
+var attack_range: int = 30
+var should_chase: bool = false
+var last_player_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	$HealthBar.set_current(health_points)
@@ -21,13 +22,10 @@ func _process(_delta: float):
 	if player != null:
 		var distance = player.position - position
 		var distance_length = distance.length()
-		if distance_length < attack_range && can_attack():
-			var attack = melee_spell.instantiate()
-			attack.position = position + distance
-			# TODO should check if is in arena
-			get_tree().get_first_node_in_group("Game").add_child(attack)
-			$AttackTimer.start()
-		if distance_length < chase_range:
+		if distance_length <= attack_range && can_attack():
+			last_player_position = position + distance
+			$AnimationPlayer.play("attack")
+		if distance_length < chase_range && distance_length > attack_range:
 			should_chase = true
 		else:
 			should_chase = false
@@ -42,8 +40,17 @@ func _physics_process(delta: float) -> void:
 			$AnimationPlayer.play("enemy_move_animation")
 	else:
 		velocity = Vector2.ZERO
-		$AnimationPlayer.stop()
+		if $AnimationPlayer.current_animation == "enemy_move_animation":
+			$AnimationPlayer.stop()
 	move_and_slide()
+
+
+func instantiate_attack():
+	var attack = melee_spell.instantiate()
+	attack.position = last_player_position
+	# TODO should check if is in arena
+	get_tree().get_first_node_in_group("Game").add_child(attack)
+	$AttackTimer.start()
 
 
 func suffer_damage(number: int):
