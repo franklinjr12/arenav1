@@ -14,7 +14,7 @@ script = ExtResource("1_iywne")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_lbhrr")]
-position = Vector2(196, 197)
+position = Vector2(172, 283)
 
 [node name="ArenaCamera" type="Camera2D" parent="."]
 position = Vector2(195, 194)
@@ -56,7 +56,16 @@ metadata/_edit_lock_ = true
 position = Vector2(606, 476)
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
-position = Vector2(126, 276)
+position = Vector2(172, 283)
 
 [node name="EnemySpawn" type="Node2D" parent="."]
 position = Vector2(603, 478)
+
+[node name="ArenaWalls" type="StaticBody2D" parent="."]
+position = Vector2(116, 307)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ArenaWalls"]
+build_mode = 1
+polygon = PackedVector2Array(0, 0, 49, -90, 163, -153, 364, -184, 490, -206, 618, -187, 883, -121, 976, -9, 921, 85, 747, 131, 495, 188, 227, 136, 47, 91)
+metadata/_edit_lock_ = true
