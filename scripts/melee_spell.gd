@@ -1,7 +1,6 @@
 extends Sprite2D
 
-#var base_damage: int = 5
-var base_damage: float = 0.1
+var base_damage: int = 5
 var damaged = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
