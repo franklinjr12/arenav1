@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b6ydjnhhpafm0"]
 
-[ext_resource type="Texture2D" uid="uid://br75vfgdxlc2j" path="res://sprites/ugly_rat.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://dgvd6oob2rpem" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Texture2D" uid="uid://r2np6qfvyfe5" path="res://sprites/mousev1.png" id="2_4ra3w"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="3_4ra3w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md0e3"]
@@ -104,7 +104,9 @@ position = Vector2(10, 0)
 script = ExtResource("1_md0e3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_7p1mj")
+scale = Vector2(1.42, 1.42)
+texture = ExtResource("2_4ra3w")
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)

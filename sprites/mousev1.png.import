@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br75vfgdxlc2j"
-path="res://.godot/imported/ugly_rat.png-ca5c838ea194620b62fff2e454400d80.ctex"
+uid="uid://r2np6qfvyfe5"
+path="res://.godot/imported/mousev1.png-515468903d597a04bafaff4900ea8b9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ugly_rat.png"
-dest_files=["res://.godot/imported/ugly_rat.png-ca5c838ea194620b62fff2e454400d80.ctex"]
+source_file="res://sprites/mousev1.png"
+dest_files=["res://.godot/imported/mousev1.png-515468903d597a04bafaff4900ea8b9a.ctex"]
 
 [params]
 

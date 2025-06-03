@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bh7ryb0mb3rh0"]
 
 [ext_resource type="Script" uid="uid://cxalnlsqejr3s" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://b5jrfr5cx2x8q" path="res://sprites/ugly_mage.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://dyb8c676sbs5v" path="res://sprites/magev1.png" id="2_g2els"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
 radius = 5.5
@@ -49,7 +49,8 @@ script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_qhqgy")
+scale = Vector2(1.67, 1.67)
+texture = ExtResource("2_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0.5)
