@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5xeltgbeoosb"]
+
+[ext_resource type="Script" uid="uid://b6laq15jgoq4r" path="res://shaders/sprite_flasher.gd" id="1_xanpf"]
+
+[node name="SpriteFlasher" type="Node"]
+script = ExtResource("1_xanpf")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh7ryb0mb3rh0"]
+[gd_scene load_steps=8 format=3 uid="uid://bh7ryb0mb3rh0"]
 
 [ext_resource type="Script" uid="uid://cxalnlsqejr3s" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dyb8c676sbs5v" path="res://sprites/magev1.png" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="3_qhqgy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
 radius = 5.5
@@ -76,5 +77,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_dqkch")
 }
 speed_scale = 2.0
+
+[node name="SpriteFlasher" parent="." instance=ExtResource("3_qhqgy")]
 
 [connection signal="timeout" from="EActionTimer" to="." method="_on_e_action_timer_timeout"]

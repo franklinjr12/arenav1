@@ -54,6 +54,7 @@ func instantiate_attack():
 
 
 func suffer_damage(number: int):
+	$SpriteFlasher.flash()
 	health_points -= number
 	if health_points <= 0:
 		died.emit()

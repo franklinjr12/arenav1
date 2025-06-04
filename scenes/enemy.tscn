@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6ydjnhhpafm0"]
+[gd_scene load_steps=10 format=3 uid="uid://b6ydjnhhpafm0"]
 
 [ext_resource type="Script" uid="uid://dgvd6oob2rpem" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://r2np6qfvyfe5" path="res://sprites/mousev1.png" id="2_4ra3w"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="3_4ra3w"]
+[ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="4_5uy6h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md0e3"]
 radius = 5.0
@@ -47,21 +48,6 @@ tracks/2/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_4ra3w"]
-resource_name = "enemy_move_animation"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
-}
-
 [sub_resource type="Animation" id="Animation_c4w8v"]
 resource_name = "attack"
 length = 0.2
@@ -90,6 +76,21 @@ tracks/1/keys = {
 "args": [],
 "method": &"instantiate_attack"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_4ra3w"]
+resource_name = "enemy_move_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c4w8v"]
@@ -127,3 +128,5 @@ scale = Vector2(0.18, 0.18)
 libraries = {
 &"": SubResource("AnimationLibrary_c4w8v")
 }
+
+[node name="SpriteFlasher" parent="." instance=ExtResource("4_5uy6h")]

@@ -56,6 +56,7 @@ func _physics_process(delta: float) -> void:
 func suffer_damage(number: int):
 	if shield_on:
 		return
+	$SpriteFlasher.flash()
 	health_points -= number
 	if health_points <= 0:
 		died.emit()
