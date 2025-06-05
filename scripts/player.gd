@@ -78,6 +78,7 @@ func trigger_action_q(direction: Vector2):
 		var action = basic_spell.instantiate()
 		action.position = position + direction * player_distance
 		action.set_direction(direction)
+		action.set_caster(self)
 		# TODO should check if is in arena
 		get_tree().get_first_node_in_group("Game").add_child(action)
 		trigger_spell_cooldown("Q")
