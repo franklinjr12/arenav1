@@ -22,6 +22,10 @@ func set_caster(caster):
 	who_casted = caster
 
 
+func set_lifetime(time: float):
+	$LifetimeTimer.wait_time = time
+
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body != who_casted:
 		if body.has_method("suffer_damage"):

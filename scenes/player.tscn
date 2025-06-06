@@ -80,4 +80,7 @@ speed_scale = 2.0
 
 [node name="SpriteFlasher" parent="." instance=ExtResource("3_qhqgy")]
 
+[node name="BlinkTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="EActionTimer" to="." method="_on_e_action_timer_timeout"]

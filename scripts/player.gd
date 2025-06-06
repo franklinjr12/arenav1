@@ -32,6 +32,9 @@ func _process(_delta: float) -> void:
 		trigger_action_e(dir)
 	if Input.is_action_pressed("r_action"):
 		trigger_action_r(dir)
+	if Input.is_action_pressed("dodge") && $BlinkTimer.is_stopped():
+		should_blink = true
+		$BlinkTimer.start()
 
 
 
@@ -85,9 +88,20 @@ func trigger_action_q(direction: Vector2):
 		$QActionTimer.start()
 
 
-func trigger_action_w(_direction: Vector2):
+func trigger_action_w(direction: Vector2):
 	if $WActionTimer.is_stopped():
-		should_blink = true
+		var angle: float = deg_to_rad(30)
+		var lifetime = 0.5
+		for i in [-1,0,1]:
+			var direction_rotation = Vector2(direction.x*cos(angle*i) - direction.y*sin(angle*i),
+											direction.x*sin(angle*i) + direction.y*cos(angle*i))
+			var action = basic_spell.instantiate()
+			action.position = position + direction_rotation * player_distance
+			action.set_direction(direction_rotation)
+			action.set_caster(self)
+			action.set_lifetime(lifetime)
+			# TODO should check if is in arena
+			get_tree().get_first_node_in_group("Game").add_child(action)
 		trigger_spell_cooldown("W")
 		$WActionTimer.start()
 
@@ -106,6 +120,7 @@ func trigger_action_r(_direction: Vector2):
 		get_tree().get_first_node_in_group("Game").add_child(action)
 		trigger_spell_cooldown("R")
 		$RActionTimer.start()
+
 
 func _on_e_action_timer_timeout():
 	shield_on = false
