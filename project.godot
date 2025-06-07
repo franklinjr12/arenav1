@@ -22,6 +22,7 @@ Game=""
 PlayerSpellsUi=""
 PlayerHealthBar=""
 Enemy=""
+ArenaTime=""
 
 [input]
 

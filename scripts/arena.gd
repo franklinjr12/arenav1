@@ -1,10 +1,11 @@
 extends Node2D
-class_name Game
+class_name Arena
 
 @onready var enemy = preload("res://scenes/enemy.tscn")
 @onready var player = preload("res://scenes/player.tscn")
 
 var current_enemies_count: int = 0
+var current_arena_time: int = 0
 
 func _ready() -> void:
 	connect_player()
@@ -12,6 +13,12 @@ func _ready() -> void:
 	var retry_button = get_node_or_null("ArenaCamera/ArenaEndUi")
 	if retry_button != null:
 		retry_button.retry_button_clicked.connect(on_retry_button)
+	set_combat_time(current_arena_time)
+
+
+func set_combat_time(time: int) -> void:
+	var formatted_string = "%03d" % time
+	get_tree().get_first_node_in_group("ArenaTime").text = formatted_string
 
 
 func connect_player():
@@ -77,3 +84,8 @@ func on_enemies_died():
 
 func on_retry_button():
 	reset_arena()
+
+
+func _on_combat_timer_timeout() -> void:
+	current_arena_time += 1
+	set_combat_time(current_arena_time)

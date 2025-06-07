@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cotssc72bpfg"]
 
-[ext_resource type="Script" uid="uid://br5lf5cq1muef" path="res://scripts/game.gd" id="1_iywne"]
+[ext_resource type="Script" uid="uid://cgkiqcc8cwnhb" path="res://scripts/arena.gd" id="1_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://bh7ryb0mb3rh0" path="res://scenes/player.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://bpoof3cfbppe7" path="res://scripts/arena_camera.gd" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://chbf47bmcasnt" path="res://sprites/battle_arena.png" id="4_lbhrr"]
@@ -11,18 +11,23 @@
 [ext_resource type="PackedScene" uid="uid://r3m0cdc7ro1x" path="res://enemies/caster/enemy_caster.tscn" id="9_0tnpc"]
 
 [node name="Game" type="Node2D" groups=["Game"]]
-script = ExtResource("1_iywne")
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." instance=ExtResource("1_lbhrr")]
+[node name="Arena" type="Node2D" parent="."]
+script = ExtResource("1_0tnpc")
+
+[node name="CombatTimer" type="Timer" parent="Arena"]
+autostart = true
+
+[node name="Player" parent="Arena" instance=ExtResource("1_lbhrr")]
 position = Vector2(172, 283)
 
-[node name="ArenaCamera" type="Camera2D" parent="."]
+[node name="ArenaCamera" type="Camera2D" parent="Arena"]
 position = Vector2(195, 194)
 zoom = Vector2(2, 2)
 script = ExtResource("3_lnu2h")
 
-[node name="PlayerSpellsUi" parent="ArenaCamera" instance=ExtResource("4_p57ef")]
+[node name="PlayerSpellsUi" parent="Arena/ArenaCamera" instance=ExtResource("4_p57ef")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -32,44 +37,55 @@ offset_right = -86.0
 offset_bottom = 119.0
 grow_horizontal = 1
 grow_vertical = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerHealthBar" parent="ArenaCamera" groups=["PlayerHealthBar"] instance=ExtResource("5_u5sy4")]
+[node name="PlayerHealthBar" parent="Arena/ArenaCamera" groups=["PlayerHealthBar"] instance=ExtResource("5_u5sy4")]
 offset_left = -280.0
 offset_top = 116.0
 offset_right = -280.0
 offset_bottom = 116.0
+metadata/_edit_use_anchors_ = true
 
-[node name="ArenaEndUi" parent="ArenaCamera" instance=ExtResource("6_gee14")]
+[node name="ArenaEndUi" parent="Arena/ArenaCamera" instance=ExtResource("6_gee14")]
 visible = false
 offset_left = -22.0
 offset_top = -83.0
 offset_right = -22.0
 offset_bottom = -83.0
 
-[node name="BackgroundArenaSprite" type="Sprite2D" parent="."]
+[node name="ArenaTimeLabel" type="Label" parent="Arena/ArenaCamera" groups=["ArenaTime"]]
+offset_left = 12.0
+offset_top = -149.0
+offset_right = 52.0
+offset_bottom = -126.0
+text = "000"
+
+[node name="BackgroundArenaSprite" type="Sprite2D" parent="Arena"]
 z_index = -1
 position = Vector2(577.5, 323)
 scale = Vector2(1.12402, 0.630859)
 texture = ExtResource("4_lbhrr")
 metadata/_edit_lock_ = true
 
-[node name="Enemy" parent="." instance=ExtResource("5_iywne")]
+[node name="Enemy" parent="Arena" instance=ExtResource("5_iywne")]
 position = Vector2(606, 476)
 
-[node name="PlayerSpawn" type="Node2D" parent="."]
+[node name="PlayerSpawn" type="Node2D" parent="Arena"]
 position = Vector2(172, 283)
 
-[node name="EnemySpawn" type="Node2D" parent="."]
+[node name="EnemySpawn" type="Node2D" parent="Arena"]
 position = Vector2(603, 478)
 
-[node name="ArenaWalls" type="StaticBody2D" parent="."]
+[node name="ArenaWalls" type="StaticBody2D" parent="Arena"]
 position = Vector2(116, 307)
 metadata/_edit_lock_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ArenaWalls"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Arena/ArenaWalls"]
 build_mode = 1
 polygon = PackedVector2Array(0, 0, 49, -90, 163, -153, 364, -184, 490, -206, 618, -187, 883, -121, 976, -9, 921, 85, 747, 131, 495, 188, 227, 136, 47, 91)
 metadata/_edit_lock_ = true
 
-[node name="EnemyCaster" parent="." instance=ExtResource("9_0tnpc")]
+[node name="EnemyCaster" parent="Arena" instance=ExtResource("9_0tnpc")]
 position = Vector2(673, 238)
+
+[connection signal="timeout" from="Arena/CombatTimer" to="Arena" method="_on_combat_timer_timeout"]
