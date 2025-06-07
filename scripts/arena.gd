@@ -33,14 +33,15 @@ func connect_enemies():
 
 
 func show_arena_end():
-	var ui = get_node_or_null("ArenaCamera/ArenaEndUi")
+	var ui = get_tree().get_first_node_in_group("ArenaEndUi")
 	if ui != null:
+		ui.set_grade(completion_grade())
 		ui.victory()
 		ui.visible = true
 
 
 func reset_arena():
-	var ui = get_node_or_null("ArenaCamera/ArenaEndUi")
+	var ui = get_tree().get_first_node_in_group("ArenaEndUi")
 	if ui != null:
 		ui.visible = false
 	reset_enemies()
@@ -89,3 +90,18 @@ func on_retry_button():
 func _on_combat_timer_timeout() -> void:
 	current_arena_time += 1
 	set_combat_time(current_arena_time)
+
+
+func completion_grade() -> String:
+	var time: int = current_arena_time
+	if time < 30:
+		return "A"
+	if time < 60:
+		return "B"
+	if time < 130:
+		return "C"
+	if time < 160:
+		return "D"
+	if time < 190:
+		return "E"
+	return "F"

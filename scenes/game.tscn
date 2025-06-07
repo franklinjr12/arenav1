@@ -46,7 +46,7 @@ offset_right = -280.0
 offset_bottom = 116.0
 metadata/_edit_use_anchors_ = true
 
-[node name="ArenaEndUi" parent="Arena/ArenaCamera" instance=ExtResource("6_gee14")]
+[node name="ArenaEndUi" parent="Arena/ArenaCamera" groups=["ArenaEndUi"] instance=ExtResource("6_gee14")]
 visible = false
 offset_left = -22.0
 offset_top = -83.0
