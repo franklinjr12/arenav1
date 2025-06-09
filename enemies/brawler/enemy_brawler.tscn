@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxb17qgwkfuqi"]
+
+[ext_resource type="Texture2D" uid="uid://8odcr6rr6cga" path="res://enemies/brawler/skeleton.png" id="1_q0wsr"]
+[ext_resource type="Script" uid="uid://dw24is3p8vo1" path="res://enemies/brawler/enemy_brawler.gd" id="1_xie8d"]
+[ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="2_3j7o2"]
+[ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="3_xie8d"]
+[ext_resource type="PackedScene" uid="uid://5m5dv8wp21pn" path="res://enemies/common/enemy_resource/enemy_resource.tscn" id="5_n42a1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n60ya"]
+radius = 7.0
+
+[node name="EnemyBrawler" type="CharacterBody2D"]
+script = ExtResource("1_xie8d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_q0wsr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_n60ya")
+
+[node name="HealthBar" parent="." instance=ExtResource("2_3j7o2")]
+offset_left = -9.1
+offset_top = -23.94
+offset_right = -9.1
+offset_bottom = -23.94
+scale = Vector2(0.18, 0.18)
+
+[node name="SpriteFlasher" parent="." instance=ExtResource("3_xie8d")]
+
+[node name="EnemyResource" parent="." instance=ExtResource("5_n42a1")]
+
+[node name="AttackTimer" type="Timer" parent="."]

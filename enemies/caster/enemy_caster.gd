@@ -3,15 +3,15 @@ class_name EnemyCharacter
 
 signal died
 
-@export var chase_range: int = 300
-@export var speed_multiplier: int = 2500
 
 @onready var basic_spell = preload("res://scenes/basic_spell.tscn")
 
+@export var chase_range: int = 300
+@export var speed_multiplier: int = 2500
 const cast_distance = 20
-
 var health_points: float = 5
 var attack_range: int = 200
+
 var should_chase: bool = false
 var last_player_position: Vector2 = Vector2.ZERO
 
@@ -21,7 +21,7 @@ func _ready() -> void:
 	$AttackTimer.one_shot = true
 
 
-func _process(_delta: float):
+func _process(_delta: float) -> void:
 	var player: Player = get_player()
 	if player != null:
 		var distance = player.position - position
