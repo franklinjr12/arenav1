@@ -1,5 +1,5 @@
-extends Resource
-class_name EnemyResource
+extends Node
+class_name EnemyStats
 
 @export var attack_range: int = 200
 @export var attack_wait_time: float = 1

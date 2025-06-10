@@ -3,7 +3,6 @@ class_name EnemyCharacter
 
 signal died
 
-
 @onready var basic_spell = preload("res://scenes/basic_spell.tscn")
 
 @export var chase_range: int = 300

@@ -24,6 +24,7 @@ PlayerHealthBar=""
 Enemy=""
 ArenaTime=""
 ArenaEndUi=""
+Arena=""
 
 [input]
 

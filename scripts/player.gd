@@ -9,7 +9,8 @@ signal died
 @onready var basic_spell = preload("res://scenes/basic_spell.tscn")
 @onready var area_spell = preload("res://scenes/area_spell.tscn")
 
-var health_points: int = 10
+# var health_points: int = 10
+var health_points: int = 100
 var target_position: Vector2 = Vector2.ZERO
 var position_threshold: int = 20
 var should_blink = false

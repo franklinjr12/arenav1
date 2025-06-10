@@ -48,8 +48,7 @@ func _physics_process(delta: float) -> void:
 func instantiate_attack():
 	var attack = melee_spell.instantiate()
 	attack.position = last_player_position
-	# TODO should check if is in arena
-	get_tree().get_first_node_in_group("Game").add_child(attack)
+	get_tree().get_first_node_in_group("Arena").add_child(attack)
 	$AttackTimer.start()
 
 
