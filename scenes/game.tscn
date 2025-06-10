@@ -1,15 +1,15 @@
 [gd_scene load_steps=11 format=3 uid="uid://cotssc72bpfg"]
 
 [ext_resource type="Script" uid="uid://cgkiqcc8cwnhb" path="res://scripts/arena.gd" id="1_0tnpc"]
-[ext_resource type="PackedScene" uid="uid://bh7ryb0mb3rh0" path="res://scenes/player.tscn" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bh7ryb0mb3rh0" path="res://scenes/player/player.tscn" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://bpoof3cfbppe7" path="res://scripts/arena_camera.gd" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://chbf47bmcasnt" path="res://sprites/battle_arena.png" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://biufh30s7k4is" path="res://scenes/player_spells_ui.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="5_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bnhn0dj7amqc1" path="res://scenes/arena_end_ui.tscn" id="6_gee14"]
-[ext_resource type="PackedScene" uid="uid://dxb17qgwkfuqi" path="res://enemies/brawler/enemy_brawler.tscn" id="9_0tnpc"]
-[ext_resource type="PackedScene" uid="uid://r3m0cdc7ro1x" path="res://enemies/caster/enemy_caster.tscn" id="9_vtaks"]
-[ext_resource type="PackedScene" uid="uid://c22rghoo0f1rv" path="res://enemies/rat/enemy_rat.tscn" id="10_vtaks"]
+[ext_resource type="PackedScene" uid="uid://dxb17qgwkfuqi" path="res://scenes/enemies/brawler/enemy_brawler.tscn" id="9_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://r3m0cdc7ro1x" path="res://scenes/enemies/caster/enemy_caster.tscn" id="9_vtaks"]
+[ext_resource type="PackedScene" uid="uid://c22rghoo0f1rv" path="res://scenes/enemies/rat/enemy_rat.tscn" id="10_vtaks"]
 
 [node name="Game" type="Node2D" groups=["Game"]]
 metadata/_edit_lock_ = true
@@ -60,6 +60,14 @@ offset_top = -149.0
 offset_right = 52.0
 offset_bottom = -126.0
 text = "000"
+
+[node name="TestLabel" type="Label" parent="Arena/ArenaCamera" groups=["TestLabel"]]
+visible = false
+offset_left = 139.0
+offset_top = -154.0
+offset_right = 278.0
+offset_bottom = -83.0
+text = "Test"
 
 [node name="BackgroundArenaSprite" type="Sprite2D" parent="Arena"]
 z_index = -1

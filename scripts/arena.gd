@@ -1,14 +1,15 @@
 extends Node2D
 class_name Arena
 
-@onready var enemy_rat = preload("res://enemies/rat/enemy_rat.tscn")
-@onready var enemy_caster = preload("res://enemies/caster/enemy_caster.tscn")
-@onready var enemy_brawler = preload("res://enemies/brawler/enemy_brawler.tscn")
-@onready var player = preload("res://scenes/player.tscn")
+@onready var enemy_rat = preload("res://scenes/enemies/rat/enemy_rat.tscn")
+@onready var enemy_caster = preload("res://scenes/enemies/caster/enemy_caster.tscn")
+@onready var enemy_brawler = preload("res://scenes/enemies/brawler/enemy_brawler.tscn")
+@onready var player = preload("res://scenes/player/player.tscn")
 
 var current_enemies_count: int = 0
 var current_arena_time: int = 0
 var player_died: bool = false
+var player_inst: Player = null
 
 func _ready() -> void:
 	connect_player()
@@ -25,7 +26,7 @@ func set_combat_time(time: int) -> void:
 
 
 func connect_player():
-	get_tree().get_first_node_in_group("Player").died.connect(on_player_died)
+	get_player().died.connect(on_player_died)
 
 
 func connect_enemies():
@@ -35,15 +36,31 @@ func connect_enemies():
 		e.died.connect(on_enemies_died)
 
 
+func get_player() -> Player:
+	var p = get_tree().get_first_node_in_group("Player")
+	if p == null:
+		p = player_inst
+	return p
+
+
 func show_arena_end():
+	var player: Player = get_player()
+	var test_label: Label = get_tree().get_first_node_in_group("TestLabel")
+	test_label.visible = true
+	test_label.text = "Exp: {0}\nLevel: {1}".format([player.get_experience(), player.get_level()])
 	var ui = get_tree().get_first_node_in_group("ArenaEndUi")
 	if ui != null:
 		ui.set_grade(completion_grade())
-		ui.victory()
+		if player_died:
+			ui.defeat()
+		else:
+			ui.victory()
 		ui.visible = true
 
 
 func reset_arena():
+	var test_label: Label = get_tree().get_first_node_in_group("TestLabel")
+	test_label.visible = false
 	var ui = get_tree().get_first_node_in_group("ArenaEndUi")
 	if ui != null:
 		ui.visible = false
@@ -54,14 +71,15 @@ func reset_arena():
 
 
 func reset_player():
-	# TODO do not delete the player
-	# Instead just remove from scene and handle appropriatly
-	var current_player = get_tree().get_first_node_in_group("Player")
+	var current_player: Player = get_player()
 	if current_player != null:
-		current_player.free()
-	var player_inst = player.instantiate()
-	player_inst.position = $PlayerSpawn.position
-	add_child(player_inst)
+		remove_child(current_player)
+	if current_player == null:
+		current_player = player_inst
+	add_child(current_player)
+	current_player.position = $PlayerSpawn.position
+	if player_died:
+		current_player.set_initial_values()
 	connect_player()
 
 
@@ -83,13 +101,16 @@ func reset_enemies():
 
 func on_player_died():
 	player_died = true
-	var ui = get_node_or_null("ArenaCamera/ArenaEndUi")
-	if ui != null:
-		ui.defeat()
-		ui.visible = true
+	player_inst = get_player()
+	remove_child(player_inst)
+	show_arena_end()
 
 
-func on_enemies_died():
+func on_enemies_died(param: Dictionary):
+	if param != null:
+		if param.has("experience"):
+			var drop_exp:int = param["experience"]
+			get_player().gain_experience(drop_exp)
 	current_enemies_count -= 1
 	if current_enemies_count == 0:
 		show_arena_end()

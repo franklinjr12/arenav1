@@ -9,7 +9,6 @@ signal died
 @onready var basic_spell = preload("res://scenes/basic_spell.tscn")
 @onready var area_spell = preload("res://scenes/area_spell.tscn")
 
-var health_points: int = 10
 var target_position: Vector2 = Vector2.ZERO
 var position_threshold: int = 20
 var should_blink = false
@@ -17,10 +16,10 @@ var blink_distance = 100
 var shield_on = false
 
 func _ready() -> void:
-	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
-	if health_bar != null:
-		health_bar.set_max(health_points)
-		health_bar.set_current(health_points)
+	# not sure why signal is not triggering
+	# $PlayerStats.levelled_up.connect(on_level_up)
+	pass
+
 
 func _process(_delta: float) -> void:
 	var dir = (get_global_mouse_position() - position).normalized()
@@ -56,17 +55,36 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func gain_experience(points: int) -> void:
+	$PlayerStats.gain_experience_points(points)
+
+
+func get_experience() -> int:
+	return $PlayerStats.experience_points
+
+
+func get_level() -> int:
+	return $PlayerStats.level
+
+
+func set_initial_values() -> void:
+	$PlayerStats.health_points = $PlayerStats.max_health_points
+	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
+	if health_bar != null:
+		health_bar.set_max($PlayerStats.health_points)
+		health_bar.set_current($PlayerStats.health_points)
+
+
 func suffer_damage(number: int):
 	if shield_on:
 		return
 	$SpriteFlasher.flash()
-	health_points -= number
-	if health_points <= 0:
-		died.emit()
-		queue_free()
+	$PlayerStats.health_points -= number
 	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
 	if health_bar != null:
-		health_bar.set_current(health_points)
+		health_bar.set_current($PlayerStats.health_points)
+	if $PlayerStats.health_points <= 0:
+		died.emit()
 
 
 func trigger_spell_cooldown(spell: String):
@@ -82,8 +100,8 @@ func trigger_action_q(direction: Vector2):
 		action.position = position + direction * player_distance
 		action.set_direction(direction)
 		action.set_caster(self)
-		# TODO should check if is in arena
-		get_tree().get_first_node_in_group("Game").add_child(action)
+		action.base_damage = action.base_damage * $PlayerStats.damage_multiplier
+		get_tree().get_first_node_in_group("Arena").add_child(action)
 		trigger_spell_cooldown("Q")
 		$QActionTimer.start()
 
@@ -100,8 +118,7 @@ func trigger_action_w(direction: Vector2):
 			action.set_direction(direction_rotation)
 			action.set_caster(self)
 			action.set_lifetime(lifetime)
-			# TODO should check if is in arena
-			get_tree().get_first_node_in_group("Game").add_child(action)
+			get_tree().get_first_node_in_group("Arena").add_child(action)
 		trigger_spell_cooldown("W")
 		$WActionTimer.start()
 
@@ -116,11 +133,18 @@ func trigger_action_r(_direction: Vector2):
 	if $RActionTimer.is_stopped():
 		var action = area_spell.instantiate()
 		action.position = position
-		# TODO should check if is in arena
-		get_tree().get_first_node_in_group("Game").add_child(action)
+		get_tree().get_first_node_in_group("Arena").add_child(action)
 		trigger_spell_cooldown("R")
 		$RActionTimer.start()
 
 
 func _on_e_action_timer_timeout():
 	shield_on = false
+
+
+func on_level_up():
+	$PlayerStats.health_points = $PlayerStats.max_health_points
+	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
+	if health_bar != null:
+		health_bar.set_max($PlayerStats.health_points)
+		health_bar.set_current($PlayerStats.health_points)

@@ -86,6 +86,7 @@ func suffer_damage(number: int):
 	$SpriteFlasher.flash()
 	$EnemyStats.health_points -= number
 	if $EnemyStats.health_points <= 0:
-		died.emit()
+		var signal_param = {"experience": $EnemyStats.experience_drop}
+		died.emit(signal_param)
 		queue_free()
 	$HealthBar.set_current($EnemyStats.health_points)

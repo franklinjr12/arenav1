@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bh7ryb0mb3rh0"]
+[gd_scene load_steps=9 format=3 uid="uid://bh7ryb0mb3rh0"]
 
-[ext_resource type="Script" uid="uid://cxalnlsqejr3s" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://cxalnlsqejr3s" path="res://scenes/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dyb8c676sbs5v" path="res://sprites/magev1.png" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="3_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://bq4ea0g35b1gs" path="res://scenes/player/player_stats.tscn" id="4_lvxji"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
 radius = 5.5
@@ -82,5 +83,7 @@ speed_scale = 2.0
 
 [node name="BlinkTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="PlayerStats" parent="." instance=ExtResource("4_lvxji")]
 
 [connection signal="timeout" from="EActionTimer" to="." method="_on_e_action_timer_timeout"]

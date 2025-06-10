@@ -1,14 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxb17qgwkfuqi"]
+[gd_scene load_steps=12 format=3 uid="uid://c22rghoo0f1rv"]
 
-[ext_resource type="Script" uid="uid://bbcsggrjlncfa" path="res://enemies/common/enemy_character.gd" id="1_n42a1"]
-[ext_resource type="Texture2D" uid="uid://8odcr6rr6cga" path="res://enemies/brawler/skeleton.png" id="1_q0wsr"]
-[ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="2_3j7o2"]
-[ext_resource type="PackedScene" uid="uid://bpiqdllq5i4td" path="res://scenes/melee_spell.tscn" id="2_215y0"]
-[ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="3_xie8d"]
-[ext_resource type="PackedScene" uid="uid://5m5dv8wp21pn" path="res://enemies/common/enemy_stats/enemy_stats.tscn" id="5_n42a1"]
+[ext_resource type="Script" uid="uid://bbcsggrjlncfa" path="res://scenes/enemies/common/enemy_character.gd" id="1_wsrom"]
+[ext_resource type="PackedScene" uid="uid://bpiqdllq5i4td" path="res://scenes/melee_spell.tscn" id="2_83kv7"]
+[ext_resource type="Texture2D" uid="uid://r2np6qfvyfe5" path="res://sprites/mousev1.png" id="2_s8bg6"]
+[ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="3_4p3gl"]
+[ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="4_lfc1c"]
+[ext_resource type="PackedScene" uid="uid://5m5dv8wp21pn" path="res://scenes/enemies/common/enemy_stats/enemy_stats.tscn" id="5_1qih3"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n60ya"]
-radius = 7.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md0e3"]
+radius = 5.0
+height = 20.0
 
 [sub_resource type="Animation" id="Animation_5uy6h"]
 length = 0.001
@@ -101,34 +102,39 @@ _data = {
 &"enemy_move_animation": SubResource("Animation_4ra3w")
 }
 
-[node name="EnemyBrawler" type="CharacterBody2D" groups=["Enemy"]]
-script = ExtResource("1_n42a1")
-spell = ExtResource("2_215y0")
+[node name="EnemyRat" type="CharacterBody2D" groups=["Enemy"]]
+position = Vector2(10, 0)
+script = ExtResource("1_wsrom")
+spell = ExtResource("2_83kv7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_q0wsr")
+scale = Vector2(1.42, 1.42)
+texture = ExtResource("2_s8bg6")
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_n60ya")
-
-[node name="HealthBar" parent="." instance=ExtResource("2_3j7o2")]
-offset_left = -9.1
-offset_top = -23.94
-offset_right = -9.1
-offset_bottom = -23.94
-scale = Vector2(0.18, 0.18)
-
-[node name="SpriteFlasher" parent="." instance=ExtResource("3_xie8d")]
+position = Vector2(-1, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_md0e3")
 
 [node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
 
-[node name="EnemyStats" parent="." instance=ExtResource("5_n42a1")]
-attack_range = 40
-health_points = 10.0
-speed_multiplier = 6000
+[node name="HealthBar" parent="." instance=ExtResource("3_4p3gl")]
+offset_left = -11.0
+offset_top = -15.0
+offset_right = -11.0
+offset_bottom = -15.0
+scale = Vector2(0.18, 0.18)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_c4w8v")
 }
+
+[node name="SpriteFlasher" parent="." instance=ExtResource("4_lfc1c")]
+
+[node name="EnemyStats" parent="." instance=ExtResource("5_1qih3")]
+attack_range = 40
+health_points = 3.0
+speed_multiplier = 6000

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8odcr6rr6cga"
-path="res://.godot/imported/skeleton.png-6aebfad5432b68f59e322287040188b9.ctex"
+uid="uid://bcygglls5enwu"
+path="res://.godot/imported/corrupted_mage.png-3dc877f44d4db142e9444cae4ff8f120.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/brawler/skeleton.png"
-dest_files=["res://.godot/imported/skeleton.png-6aebfad5432b68f59e322287040188b9.ctex"]
+source_file="res://scenes/enemies/caster/corrupted_mage.png"
+dest_files=["res://.godot/imported/corrupted_mage.png-3dc877f44d4db142e9444cae4ff8f120.ctex"]
 
 [params]
 
