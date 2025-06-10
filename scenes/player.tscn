@@ -45,7 +45,7 @@ _data = {
 &"player_move_animation": SubResource("Animation_g2els")
 }
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

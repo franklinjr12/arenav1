@@ -25,6 +25,7 @@ Enemy=""
 ArenaTime=""
 ArenaEndUi=""
 Arena=""
+Player=""
 
 [input]
 

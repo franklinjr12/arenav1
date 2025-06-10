@@ -13,4 +13,4 @@ func _process(_delta: float) -> void:
 		position = player.position
 
 func get_player():
-	return get_tree().get_first_node_in_group("player")
+	return get_tree().get_first_node_in_group("Player")

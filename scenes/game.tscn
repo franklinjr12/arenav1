@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cotssc72bpfg"]
+[gd_scene load_steps=11 format=3 uid="uid://cotssc72bpfg"]
 
 [ext_resource type="Script" uid="uid://cgkiqcc8cwnhb" path="res://scripts/arena.gd" id="1_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://bh7ryb0mb3rh0" path="res://scenes/player.tscn" id="1_lbhrr"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bnhn0dj7amqc1" path="res://scenes/arena_end_ui.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://dxb17qgwkfuqi" path="res://enemies/brawler/enemy_brawler.tscn" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://r3m0cdc7ro1x" path="res://enemies/caster/enemy_caster.tscn" id="9_vtaks"]
+[ext_resource type="PackedScene" uid="uid://c22rghoo0f1rv" path="res://enemies/rat/enemy_rat.tscn" id="10_vtaks"]
 
 [node name="Game" type="Node2D" groups=["Game"]]
 metadata/_edit_lock_ = true
@@ -70,9 +71,6 @@ metadata/_edit_lock_ = true
 [node name="PlayerSpawn" type="Node2D" parent="Arena"]
 position = Vector2(172, 283)
 
-[node name="EnemySpawn" type="Node2D" parent="Arena"]
-position = Vector2(603, 478)
-
 [node name="ArenaWalls" type="StaticBody2D" parent="Arena"]
 position = Vector2(116, 307)
 metadata/_edit_lock_ = true
@@ -83,9 +81,21 @@ polygon = PackedVector2Array(0, 0, 49, -90, 163, -153, 364, -184, 490, -206, 618
 metadata/_edit_lock_ = true
 
 [node name="EnemyBrawler" parent="Arena" instance=ExtResource("9_0tnpc")]
-position = Vector2(967, 284)
+position = Vector2(599, 135)
 
 [node name="EnemyCaster" parent="Arena" instance=ExtResource("9_vtaks")]
 position = Vector2(582, 281)
+
+[node name="EnemyRatSpawn" type="Node2D" parent="Arena"]
+position = Vector2(603, 478)
+
+[node name="EnemyBrawlerSpawn" type="Node2D" parent="Arena"]
+position = Vector2(598, 137)
+
+[node name="EnemyCasterSpawn" type="Node2D" parent="Arena"]
+position = Vector2(604, 289)
+
+[node name="EnemyRat" parent="Arena" instance=ExtResource("10_vtaks")]
+position = Vector2(603, 475)
 
 [connection signal="timeout" from="Arena/CombatTimer" to="Arena" method="_on_combat_timer_timeout"]

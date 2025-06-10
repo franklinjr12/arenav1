@@ -1,11 +1,14 @@
 extends Node2D
 class_name Arena
 
-@onready var enemy = null
+@onready var enemy_rat = preload("res://enemies/rat/enemy_rat.tscn")
+@onready var enemy_caster = preload("res://enemies/caster/enemy_caster.tscn")
+@onready var enemy_brawler = preload("res://enemies/brawler/enemy_brawler.tscn")
 @onready var player = preload("res://scenes/player.tscn")
 
 var current_enemies_count: int = 0
 var current_arena_time: int = 0
+var player_died: bool = false
 
 func _ready() -> void:
 	connect_player()
@@ -22,7 +25,7 @@ func set_combat_time(time: int) -> void:
 
 
 func connect_player():
-	get_tree().get_first_node_in_group("player").died.connect(on_player_died)
+	get_tree().get_first_node_in_group("Player").died.connect(on_player_died)
 
 
 func connect_enemies():
@@ -46,12 +49,14 @@ func reset_arena():
 		ui.visible = false
 	reset_enemies()
 	reset_player()
+	current_arena_time = 0
+	player_died = false
 
 
 func reset_player():
 	# TODO do not delete the player
 	# Instead just remove from scene and handle appropriatly
-	var current_player = get_tree().get_first_node_in_group("player")
+	var current_player = get_tree().get_first_node_in_group("Player")
 	if current_player != null:
 		current_player.free()
 	var player_inst = player.instantiate()
@@ -64,13 +69,20 @@ func reset_enemies():
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	for e in enemies:
 		e.free()
-	#var enemy_inst = enemy.instantiate()
-	#enemy_inst.position = $EnemySpawn.position
-	#add_child(enemy_inst)
+	var enemy_inst = enemy_rat.instantiate()
+	enemy_inst.position = $EnemyRatSpawn.position
+	add_child(enemy_inst)
+	enemy_inst = enemy_caster.instantiate()
+	enemy_inst.position = $EnemyCasterSpawn.position
+	add_child(enemy_inst)
+	enemy_inst = enemy_brawler.instantiate()
+	enemy_inst.position = $EnemyBrawlerSpawn.position
+	add_child(enemy_inst)
 	connect_enemies()
 
 
 func on_player_died():
+	player_died = true
 	var ui = get_node_or_null("ArenaCamera/ArenaEndUi")
 	if ui != null:
 		ui.defeat()
@@ -93,6 +105,8 @@ func _on_combat_timer_timeout() -> void:
 
 
 func completion_grade() -> String:
+	if player_died:
+		return "F"
 	var time: int = current_arena_time
 	if time < 30:
 		return "A"
