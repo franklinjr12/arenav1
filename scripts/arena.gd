@@ -1,7 +1,7 @@
 extends Node2D
 class_name Arena
 
-@onready var enemy = preload("res://scenes/enemy.tscn")
+@onready var enemy = null
 @onready var player = preload("res://scenes/player.tscn")
 
 var current_enemies_count: int = 0
@@ -64,9 +64,9 @@ func reset_enemies():
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	for e in enemies:
 		e.free()
-	var enemy_inst = enemy.instantiate()
-	enemy_inst.position = $EnemySpawn.position
-	add_child(enemy_inst)
+	#var enemy_inst = enemy.instantiate()
+	#enemy_inst.position = $EnemySpawn.position
+	#add_child(enemy_inst)
 	connect_enemies()
 
 

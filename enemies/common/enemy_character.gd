@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name EnemyCharacter
 
 signal died
 
@@ -27,12 +28,10 @@ func _process(_delta: float) -> void:
 		last_player_position = position + distance
 		match current_state:
 			State.IDLE:
-				print("idle")
 				if distance_length < $EnemyStats.chase_range:
 					current_state = State.CHASING
 					should_chase = true
 			State.CHASING:
-				print("chasing")
 				if distance_length <= $EnemyStats.attack_range && can_attack():
 					current_state = State.ATTACKING
 					should_chase = false
@@ -40,7 +39,6 @@ func _process(_delta: float) -> void:
 					current_state = State.IDLE
 					should_chase = false
 			State.ATTACKING:
-				print("attacking")
 				if can_attack():
 					should_attack = true
 				if distance_length > $EnemyStats.attack_range:

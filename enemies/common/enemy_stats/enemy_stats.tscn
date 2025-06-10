@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://c152npierdt0q" path="res://enemies/common/enemy_stats/enemy_stats.gd" id="1_civ6l"]
 
-[node name="EnemyResource" type="Node"]
+[node name="EnemyStats" type="Node"]
 script = ExtResource("1_civ6l")

@@ -1,17 +1,111 @@
-[gd_scene load_steps=6 format=3 uid="uid://r3m0cdc7ro1x"]
+[gd_scene load_steps=12 format=3 uid="uid://r3m0cdc7ro1x"]
 
-[ext_resource type="Script" uid="uid://dv4q32fo3scfm" path="res://enemies/caster/enemy_caster.gd" id="1_31881"]
+[ext_resource type="Script" uid="uid://bbcsggrjlncfa" path="res://enemies/common/enemy_character.gd" id="1_eihqj"]
+[ext_resource type="PackedScene" uid="uid://cucjmlobwmxl3" path="res://scenes/basic_spell.tscn" id="2_ilovg"]
 [ext_resource type="Texture2D" uid="uid://bcygglls5enwu" path="res://enemies/caster/corrupted_mage.png" id="2_stylf"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="3_5ixot"]
 [ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="4_eihqj"]
+[ext_resource type="PackedScene" uid="uid://5m5dv8wp21pn" path="res://enemies/common/enemy_stats/enemy_stats.tscn" id="5_yuyur"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ixot"]
 radius = 13.0
 height = 60.0
 
+[sub_resource type="Animation" id="Animation_5uy6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c4w8v"]
+resource_name = "attack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 2.21914, 0.466517),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(10, 0), Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"instantiate_attack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4ra3w"]
+resource_name = "enemy_move_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c4w8v"]
+_data = {
+&"RESET": SubResource("Animation_5uy6h"),
+&"attack": SubResource("Animation_c4w8v"),
+&"enemy_move_animation": SubResource("Animation_4ra3w")
+}
+
 [node name="EnemyCaster" type="CharacterBody2D" groups=["Enemy"]]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_31881")
+script = ExtResource("1_eihqj")
+spell = ExtResource("2_ilovg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_stylf")
@@ -29,3 +123,10 @@ scale = Vector2(0.36, 0.36)
 [node name="SpriteFlasher" parent="." instance=ExtResource("4_eihqj")]
 
 [node name="AttackTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c4w8v")
+}
+
+[node name="EnemyStats" parent="." instance=ExtResource("5_yuyur")]
