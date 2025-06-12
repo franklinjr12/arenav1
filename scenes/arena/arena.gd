@@ -1,6 +1,8 @@
 extends Node2D
 class_name Arena
 
+@export var enemies_difficulty: EnemiesDifficultyResource
+
 @onready var enemy_rat = preload("res://scenes/enemies/rat/enemy_rat.tscn")
 @onready var enemy_caster = preload("res://scenes/enemies/caster/enemy_caster.tscn")
 @onready var enemy_brawler = preload("res://scenes/enemies/brawler/enemy_brawler.tscn")
@@ -13,6 +15,7 @@ var player_inst: Player = null
 var difficulty: String
 
 func _ready() -> void:
+	reset_enemies()
 	connect_player()
 	connect_enemies()
 	var retry_button = get_node_or_null("ArenaCamera/ArenaEndUi")
@@ -36,7 +39,8 @@ func connect_enemies():
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	current_enemies_count = enemies.size()
 	for e in enemies:
-		e.died.connect(on_enemies_died)
+		if !e.died.is_connected(on_enemies_died):
+			e.died.connect(on_enemies_died)
 
 
 func add_player(p: Player) -> void:
@@ -98,15 +102,17 @@ func reset_enemies():
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	for e in enemies:
 		e.free()
-	var enemy_inst = enemy_rat.instantiate()
-	enemy_inst.position = $EnemyRatSpawn.position
-	add_child(enemy_inst)
-	enemy_inst = enemy_caster.instantiate()
-	enemy_inst.position = $EnemyCasterSpawn.position
-	add_child(enemy_inst)
-	enemy_inst = enemy_brawler.instantiate()
-	enemy_inst.position = $EnemyBrawlerSpawn.position
-	add_child(enemy_inst)
+	if difficulty == "":
+		difficulty = "easy"
+	var selection: Array = enemies_difficulty.enemies_spawn[difficulty]
+	var spawn_counter: int = 1
+	for s in selection:
+		var n = get_node_or_null("EnemySpawn"+str(spawn_counter))
+		if n != null:
+			var enemy = s.instantiate()
+			enemy.position = n.position
+			add_child(enemy)
+			spawn_counter += 1
 	connect_enemies()
 
 

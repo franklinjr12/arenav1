@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://m5q3ny3cxbdf"]
+
+[ext_resource type="Script" uid="uid://dth1t7th4cj8g" path="res://scenes/arena/enemies_difficulty/enemies_difficulty.gd" id="1_hpo8g"]
+
+[resource]
+script = ExtResource("1_hpo8g")
