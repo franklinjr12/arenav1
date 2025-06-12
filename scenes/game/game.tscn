@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cotssc72bpfg"]
+
+[ext_resource type="Script" uid="uid://db2fxhrj28132" path="res://scenes/game/game.gd" id="1_kp23o"]
+
+[node name="Game" type="Node2D" groups=["Game"]]
+script = ExtResource("1_kp23o")
+metadata/_edit_lock_ = true

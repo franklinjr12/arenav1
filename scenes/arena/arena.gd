@@ -4,12 +4,13 @@ class_name Arena
 @onready var enemy_rat = preload("res://scenes/enemies/rat/enemy_rat.tscn")
 @onready var enemy_caster = preload("res://scenes/enemies/caster/enemy_caster.tscn")
 @onready var enemy_brawler = preload("res://scenes/enemies/brawler/enemy_brawler.tscn")
-@onready var player = preload("res://scenes/player/player.tscn")
+# @onready var player = preload("res://scenes/player/player.tscn")
 
 var current_enemies_count: int = 0
 var current_arena_time: int = 0
 var player_died: bool = false
 var player_inst: Player = null
+var difficulty: String
 
 func _ready() -> void:
 	connect_player()
@@ -26,7 +27,9 @@ func set_combat_time(time: int) -> void:
 
 
 func connect_player():
-	get_player().died.connect(on_player_died)
+	var p: Player = get_player()
+	if !p.died.is_connected(on_player_died):
+		p.died.connect(on_player_died)
 
 
 func connect_enemies():
@@ -36,12 +39,20 @@ func connect_enemies():
 		e.died.connect(on_enemies_died)
 
 
+func add_player(p: Player) -> void:
+	p.position = $PlayerSpawn.position
+	add_child(p)
+
+
 func get_player() -> Player:
 	var p = get_tree().get_first_node_in_group("Player")
 	if p == null:
 		p = player_inst
 	return p
 
+
+func set_difficulty(option: String):
+	difficulty = option
 
 func show_arena_end():
 	var player: Player = get_player()

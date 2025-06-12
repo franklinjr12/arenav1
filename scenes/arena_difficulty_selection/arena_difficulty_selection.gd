@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 signal difficulty_selected
 
@@ -11,12 +11,12 @@ func _ready() -> void:
 
 
 func _on_easy_button_pressed() -> void:
-	difficulty_selected.emit(Difficulty.EASY)
+	difficulty_selected.emit("easy")
 
 
 func _on_medium_button_pressed() -> void:
-	difficulty_selected.emit(Difficulty.MEDIUM)
+	difficulty_selected.emit("medium")
 
 
 func _on_hard_button_pressed() -> void:
-	difficulty_selected.emit(Difficulty.HARD)
+	difficulty_selected.emit("hard")

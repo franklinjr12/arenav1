@@ -3,16 +3,16 @@
 [ext_resource type="Script" uid="uid://d05ioxtns0bt" path="res://scenes/arena_difficulty_selection/arena_difficulty_selection.gd" id="1_s2dei"]
 [ext_resource type="Texture2D" uid="uid://crgtnk1y6w7w3" path="res://sprites/basic_button_text.png" id="2_37w3f"]
 
-[node name="ArenaDifficultySelection" type="Node2D"]
+[node name="Control" type="Control" groups=["ArenaDifficultyUi"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_s2dei")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1153.0
-offset_bottom = 646.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,17 +26,17 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EasyButton" type="Button" parent="Control/VBoxContainer" groups=["EasyButton"]]
+[node name="EasyButton" type="Button" parent="VBoxContainer" groups=["EasyButton"]]
 layout_mode = 2
 text = "Easy"
 icon = ExtResource("2_37w3f")
 
-[node name="MediumButton" type="Button" parent="Control/VBoxContainer" groups=["MediumButton"]]
+[node name="MediumButton" type="Button" parent="VBoxContainer" groups=["MediumButton"]]
 layout_mode = 2
 text = "Medium"
 icon = ExtResource("2_37w3f")
 
-[node name="HardButton" type="Button" parent="Control/VBoxContainer" groups=["HardButton"]]
+[node name="HardButton" type="Button" parent="VBoxContainer" groups=["HardButton"]]
 layout_mode = 2
 text = "Hard"
 icon = ExtResource("2_37w3f")

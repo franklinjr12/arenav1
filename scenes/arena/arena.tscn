@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3dsqwya6cp26"]
+
+[ext_resource type="Script" uid="uid://cgkiqcc8cwnhb" path="res://scenes/arena/arena.gd" id="1_41jku"]
+[ext_resource type="Script" uid="uid://bpoof3cfbppe7" path="res://scripts/arena_camera.gd" id="3_ajq0i"]
+[ext_resource type="PackedScene" uid="uid://biufh30s7k4is" path="res://scenes/player_spells_ui.tscn" id="4_8vbsj"]
+[ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="5_xsx6r"]
+[ext_resource type="PackedScene" uid="uid://bnhn0dj7amqc1" path="res://scenes/arena_end_ui.tscn" id="6_ixwup"]
+[ext_resource type="Texture2D" uid="uid://chbf47bmcasnt" path="res://sprites/battle_arena.png" id="7_a43o1"]
+[ext_resource type="PackedScene" uid="uid://dxb17qgwkfuqi" path="res://scenes/enemies/brawler/enemy_brawler.tscn" id="8_ow1aj"]
+[ext_resource type="PackedScene" uid="uid://r3m0cdc7ro1x" path="res://scenes/enemies/caster/enemy_caster.tscn" id="9_6joey"]
+[ext_resource type="PackedScene" uid="uid://c22rghoo0f1rv" path="res://scenes/enemies/rat/enemy_rat.tscn" id="10_7wjmx"]
+
+[node name="Arena" type="Node2D" groups=["Arena"]]
+script = ExtResource("1_41jku")
+
+[node name="CombatTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="ArenaCamera" type="Camera2D" parent="."]
+position = Vector2(195, 194)
+zoom = Vector2(2, 2)
+script = ExtResource("3_ajq0i")
+
+[node name="PlayerSpellsUi" parent="ArenaCamera" instance=ExtResource("4_8vbsj")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -86.0
+offset_top = 119.0
+offset_right = -86.0
+offset_bottom = 119.0
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerHealthBar" parent="ArenaCamera" groups=["PlayerHealthBar"] instance=ExtResource("5_xsx6r")]
+offset_left = -280.0
+offset_top = 116.0
+offset_right = -280.0
+offset_bottom = 116.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ArenaEndUi" parent="ArenaCamera" groups=["ArenaEndUi"] instance=ExtResource("6_ixwup")]
+visible = false
+offset_left = -22.0
+offset_top = -83.0
+offset_right = -22.0
+offset_bottom = -83.0
+
+[node name="ArenaTimeLabel" type="Label" parent="ArenaCamera" groups=["ArenaTime"]]
+offset_left = 12.0
+offset_top = -149.0
+offset_right = 52.0
+offset_bottom = -126.0
+text = "000"
+
+[node name="TestLabel" type="Label" parent="ArenaCamera" groups=["TestLabel"]]
+visible = false
+offset_left = 139.0
+offset_top = -154.0
+offset_right = 278.0
+offset_bottom = -83.0
+text = "Test"
+
+[node name="BackgroundArenaSprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(577.5, 323)
+scale = Vector2(1.12402, 0.630859)
+texture = ExtResource("7_a43o1")
+metadata/_edit_lock_ = true
+
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2(172, 283)
+
+[node name="ArenaWalls" type="StaticBody2D" parent="."]
+position = Vector2(116, 307)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ArenaWalls"]
+build_mode = 1
+polygon = PackedVector2Array(0, 0, 49, -90, 163, -153, 364, -184, 490, -206, 618, -187, 883, -121, 976, -9, 921, 85, 747, 131, 495, 188, 227, 136, 47, 91)
+metadata/_edit_lock_ = true
+
+[node name="EnemyBrawler" parent="." instance=ExtResource("8_ow1aj")]
+position = Vector2(599, 135)
+
+[node name="EnemyCaster" parent="." instance=ExtResource("9_6joey")]
+position = Vector2(582, 281)
+
+[node name="EnemyRatSpawn" type="Node2D" parent="."]
+position = Vector2(603, 478)
+
+[node name="EnemyBrawlerSpawn" type="Node2D" parent="."]
+position = Vector2(598, 137)
+
+[node name="EnemyCasterSpawn" type="Node2D" parent="."]
+position = Vector2(604, 289)
+
+[node name="EnemyRat" parent="." instance=ExtResource("10_7wjmx")]
+position = Vector2(603, 475)
+
+[connection signal="timeout" from="CombatTimer" to="." method="_on_combat_timer_timeout"]
