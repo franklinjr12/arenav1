@@ -7,15 +7,20 @@ extends Node2D
 @onready var arena_results_scene: PackedScene = preload("res://scenes/arena_results/arena_results.tscn")
 
 var arena_difficulty_option: String
+var player_died: bool = false
 
 func _ready() -> void:
 	create_difficulty_screen()
+	player.died.connect(on_player_died)
 
 
 func create_arena(difficulty: String) -> void:
 	var arena: Arena = arena_scene.instantiate()
 	arena.set_difficulty(difficulty)
 	arena.add_player(player)
+	if player_died:
+		player.set_initial_values()
+		player_died = false
 	arena.combat_ended.connect(on_arena_ended)
 	add_child(arena)
 
@@ -36,7 +41,9 @@ func create_arena_results_screen(params: Dictionary) -> void:
 func on_arena_ended(params: Dictionary):
 	var arena: Arena = get_tree().get_first_node_in_group("Arena")
 	if arena != null:
-		arena.remove_child(player)
+		var n: Node = arena.get_node(NodePath(player.name))
+		if n != null:
+			arena.remove_child(player)
 		arena.queue_free()
 	create_arena_results_screen(params)
 
@@ -48,6 +55,10 @@ func on_difficulty_selected(option: String):
 		remove_child(node)
 		node.queue_free()
 	create_arena(option)
+
+
+func on_player_died() -> void:
+	player_died = true
 
 
 func on_results_continue_pressed() -> void:

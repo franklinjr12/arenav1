@@ -8,7 +8,6 @@ signal combat_ended
 @onready var enemy_rat = preload("res://scenes/enemies/rat/enemy_rat.tscn")
 @onready var enemy_caster = preload("res://scenes/enemies/caster/enemy_caster.tscn")
 @onready var enemy_brawler = preload("res://scenes/enemies/brawler/enemy_brawler.tscn")
-# @onready var player = preload("res://scenes/player/player.tscn")
 
 var current_enemies_count: int = 0
 var current_arena_time: int = 0
@@ -20,9 +19,6 @@ func _ready() -> void:
 	reset_enemies()
 	connect_player()
 	connect_enemies()
-	var retry_button = get_node_or_null("ArenaCamera/ArenaEndUi")
-	if retry_button != null:
-		retry_button.retry_button_clicked.connect(on_retry_button)
 	set_combat_time(current_arena_time)
 
 
@@ -133,10 +129,6 @@ func on_enemies_died(param: Dictionary):
 	current_enemies_count -= 1
 	if current_enemies_count == 0:
 		show_arena_end()
-
-
-func on_retry_button():
-	reset_arena()
 
 
 func _on_combat_timer_timeout() -> void:

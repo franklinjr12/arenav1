@@ -61,6 +61,10 @@ func gain_experience(points: int) -> void:
 	$PlayerStats.gain_experience_points(points)
 
 
+func get_current_health() -> int:
+	return $PlayerStats.health_points
+
+
 func get_experience() -> int:
 	return $PlayerStats.experience_points
 
@@ -69,12 +73,12 @@ func get_level() -> int:
 	return $PlayerStats.level
 
 
+func get_max_health() -> int:
+	return $PlayerStats.max_health_points
+
+
 func set_initial_values() -> void:
 	$PlayerStats.health_points = $PlayerStats.max_health_points
-	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
-	if health_bar != null:
-		health_bar.set_max($PlayerStats.health_points)
-		health_bar.set_current($PlayerStats.health_points)
 
 
 func suffer_damage(number: int):
@@ -133,8 +137,9 @@ func trigger_action_e(_direction: Vector2):
 
 func trigger_action_r(_direction: Vector2):
 	if $RActionTimer.is_stopped():
-		var action = area_spell.instantiate()
+		var action: ProjectileSpell = area_spell.instantiate()
 		action.position = position
+		action.set_caster(self)
 		get_tree().get_first_node_in_group("Arena").add_child(action)
 		trigger_spell_cooldown("R")
 		$RActionTimer.start()

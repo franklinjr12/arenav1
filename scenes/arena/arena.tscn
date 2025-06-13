@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3dsqwya6cp26"]
+[gd_scene load_steps=11 format=3 uid="uid://c3dsqwya6cp26"]
 
 [ext_resource type="Script" uid="uid://cgkiqcc8cwnhb" path="res://scenes/arena/arena.gd" id="1_41jku"]
 [ext_resource type="Resource" uid="uid://m5q3ny3cxbdf" path="res://scenes/arena/enemies_difficulty/enemies_difficulty.tres" id="2_2ml6w"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://pxj1q1yp6uq1" path="res://sprites/arenav1.png" id="3_xgbxb"]
 [ext_resource type="PackedScene" uid="uid://biufh30s7k4is" path="res://scenes/player_spells_ui.tscn" id="4_8vbsj"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="5_xsx6r"]
-[ext_resource type="PackedScene" uid="uid://bnhn0dj7amqc1" path="res://scenes/arena_end_ui.tscn" id="6_ixwup"]
 [ext_resource type="PackedScene" uid="uid://dxb17qgwkfuqi" path="res://scenes/enemies/brawler/enemy_brawler.tscn" id="8_ow1aj"]
 [ext_resource type="PackedScene" uid="uid://r3m0cdc7ro1x" path="res://scenes/enemies/caster/enemy_caster.tscn" id="9_6joey"]
 [ext_resource type="PackedScene" uid="uid://c22rghoo0f1rv" path="res://scenes/enemies/rat/enemy_rat.tscn" id="10_7wjmx"]
@@ -145,13 +144,6 @@ offset_top = 116.0
 offset_right = -280.0
 offset_bottom = 116.0
 metadata/_edit_use_anchors_ = true
-
-[node name="ArenaEndUi" parent="ArenaCamera" groups=["ArenaEndUi"] instance=ExtResource("6_ixwup")]
-visible = false
-offset_left = -22.0
-offset_top = -83.0
-offset_right = -22.0
-offset_bottom = -83.0
 
 [node name="ArenaTimeLabel" type="Label" parent="ArenaCamera" groups=["ArenaTime"]]
 offset_left = 12.0
