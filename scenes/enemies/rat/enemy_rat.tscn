@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://c22rghoo0f1rv"]
 
 [ext_resource type="Script" uid="uid://bbcsggrjlncfa" path="res://scenes/enemies/common/enemy_character.gd" id="1_wsrom"]
-[ext_resource type="PackedScene" uid="uid://bpiqdllq5i4td" path="res://scenes/melee_spell.tscn" id="2_83kv7"]
+[ext_resource type="PackedScene" uid="uid://bpiqdllq5i4td" path="res://scenes/spells/melee_spell.tscn" id="2_83kv7"]
 [ext_resource type="Texture2D" uid="uid://r2np6qfvyfe5" path="res://sprites/mousev1.png" id="2_s8bg6"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="3_4p3gl"]
 [ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="4_lfc1c"]

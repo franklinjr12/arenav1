@@ -6,8 +6,8 @@ signal died
 @export var SPEED = 4000.0
 @export var player_distance = 20
 
-@onready var basic_spell = preload("res://scenes/basic_spell.tscn")
-@onready var area_spell = preload("res://scenes/area_spell.tscn")
+@onready var basic_spell = preload("res://scenes/spells/basic_spell.tscn")
+@onready var area_spell = preload("res://scenes/spells/area_spell.tscn")
 
 var target_position: Vector2 = Vector2.ZERO
 var position_threshold: int = 20
