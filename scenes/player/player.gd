@@ -14,11 +14,13 @@ var position_threshold: int = 20
 var should_blink = false
 var blink_distance = 100
 var shield_on = false
+var is_invulnerable: bool = false
 
 func _ready() -> void:
-	# not sure why signal is not triggering
-	# $PlayerStats.levelled_up.connect(on_level_up)
-	pass
+	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
+	if health_bar != null:
+		health_bar.set_max($PlayerStats.max_health_points)
+		health_bar.set_current($PlayerStats.health_points)
 
 
 func _process(_delta: float) -> void:
@@ -76,7 +78,7 @@ func set_initial_values() -> void:
 
 
 func suffer_damage(number: int):
-	if shield_on:
+	if shield_on || is_invulnerable:
 		return
 	$SpriteFlasher.flash()
 	$PlayerStats.health_points -= number

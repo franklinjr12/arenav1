@@ -1,6 +1,8 @@
 extends Node2D
 class_name Arena
 
+signal combat_ended
+
 @export var enemies_difficulty: EnemiesDifficultyResource
 
 @onready var enemy_rat = preload("res://scenes/enemies/rat/enemy_rat.tscn")
@@ -45,6 +47,7 @@ func connect_enemies():
 
 func add_player(p: Player) -> void:
 	p.position = $PlayerSpawn.position
+	p.is_invulnerable = false
 	add_child(p)
 
 
@@ -58,19 +61,18 @@ func get_player() -> Player:
 func set_difficulty(option: String):
 	difficulty = option
 
+
 func show_arena_end():
+	# TODO add some timer for arena not to end instantaneously
 	var player: Player = get_player()
-	var test_label: Label = get_tree().get_first_node_in_group("TestLabel")
-	test_label.visible = true
-	test_label.text = "Exp: {0}\nLevel: {1}".format([player.get_experience(), player.get_level()])
-	var ui = get_tree().get_first_node_in_group("ArenaEndUi")
-	if ui != null:
-		ui.set_grade(completion_grade())
-		if player_died:
-			ui.defeat()
-		else:
-			ui.victory()
-		ui.visible = true
+	player.is_invulnerable = true
+	var params: Dictionary = {
+		"result": "defeat" if player_died else "victory",
+		"time": current_arena_time,
+		"grade": completion_grade(),
+		"difficulty": difficulty
+	}
+	combat_ended.emit(params)
 
 
 func reset_arena():

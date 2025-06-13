@@ -1,19 +1,123 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3dsqwya6cp26"]
+[gd_scene load_steps=12 format=3 uid="uid://c3dsqwya6cp26"]
 
 [ext_resource type="Script" uid="uid://cgkiqcc8cwnhb" path="res://scenes/arena/arena.gd" id="1_41jku"]
 [ext_resource type="Resource" uid="uid://m5q3ny3cxbdf" path="res://scenes/arena/enemies_difficulty/enemies_difficulty.tres" id="2_2ml6w"]
 [ext_resource type="Script" uid="uid://bpoof3cfbppe7" path="res://scripts/arena_camera.gd" id="3_ajq0i"]
+[ext_resource type="Texture2D" uid="uid://pxj1q1yp6uq1" path="res://sprites/arenav1.png" id="3_xgbxb"]
 [ext_resource type="PackedScene" uid="uid://biufh30s7k4is" path="res://scenes/player_spells_ui.tscn" id="4_8vbsj"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="5_xsx6r"]
 [ext_resource type="PackedScene" uid="uid://bnhn0dj7amqc1" path="res://scenes/arena_end_ui.tscn" id="6_ixwup"]
-[ext_resource type="Texture2D" uid="uid://chbf47bmcasnt" path="res://sprites/battle_arena.png" id="7_a43o1"]
 [ext_resource type="PackedScene" uid="uid://dxb17qgwkfuqi" path="res://scenes/enemies/brawler/enemy_brawler.tscn" id="8_ow1aj"]
 [ext_resource type="PackedScene" uid="uid://r3m0cdc7ro1x" path="res://scenes/enemies/caster/enemy_caster.tscn" id="9_6joey"]
 [ext_resource type="PackedScene" uid="uid://c22rghoo0f1rv" path="res://scenes/enemies/rat/enemy_rat.tscn" id="10_7wjmx"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgbxb"]
+size = Vector2(328, 248)
+
 [node name="Arena" type="Node2D" groups=["Arena"]]
 script = ExtResource("1_41jku")
 enemies_difficulty = ExtResource("2_2ml6w")
+
+[node name="ArenaSprite" type="Sprite2D" parent="."]
+position = Vector2(557, 259)
+texture = ExtResource("3_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(-348, 153)
+rotation = 0.582337
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D"]
+position = Vector2(-87, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(-488, -162)
+rotation = 3.98659
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D2"]
+position = Vector2(33.5, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(-335, -320)
+rotation = -1.85972
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D3"]
+position = Vector2(33.5, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(-28, -485)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D4"]
+position = Vector2(33.5, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(-586, -127)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D5"]
+position = Vector2(33.5, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(181, -233)
+rotation = -2.79462
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D6"]
+position = Vector2(-87, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(281, -187)
+rotation = -2.54429
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D7"]
+position = Vector2(-87, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(414, -49)
+rotation = -1.47044
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D8"]
+position = Vector2(-87, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(328, 195)
+rotation = -0.529638
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D9"]
+position = Vector2(-87, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(107, 324)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D10"]
+position = Vector2(-87, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D11" type="StaticBody2D" parent="ArenaSprite"]
+position = Vector2(-142, 285)
+rotation = 0.568409
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaSprite/StaticBody2D11"]
+position = Vector2(-87, 114)
+shape = SubResource("RectangleShape2D_xgbxb")
+metadata/_edit_lock_ = true
 
 [node name="CombatTimer" type="Timer" parent="."]
 autostart = true
@@ -64,24 +168,8 @@ offset_right = 278.0
 offset_bottom = -83.0
 text = "Test"
 
-[node name="BackgroundArenaSprite" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(577.5, 323)
-scale = Vector2(1.12402, 0.630859)
-texture = ExtResource("7_a43o1")
-metadata/_edit_lock_ = true
-
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2(172, 283)
-
-[node name="ArenaWalls" type="StaticBody2D" parent="."]
-position = Vector2(116, 307)
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ArenaWalls"]
-build_mode = 1
-polygon = PackedVector2Array(0, 0, 49, -90, 163, -153, 364, -184, 490, -206, 618, -187, 883, -121, 976, -9, 921, 85, 747, 131, 495, 188, 227, 136, 47, 91)
-metadata/_edit_lock_ = true
 
 [node name="EnemyBrawler" parent="." instance=ExtResource("8_ow1aj")]
 position = Vector2(599, 135)
