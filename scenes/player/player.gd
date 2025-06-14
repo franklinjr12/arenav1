@@ -16,11 +16,14 @@ var blink_distance = 100
 var shield_on = false
 var is_invulnerable: bool = false
 
+const base_blink_cooldown = 2.0
+
 func _ready() -> void:
 	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
 	if health_bar != null:
 		health_bar.set_max($PlayerStats.max_health_points)
 		health_bar.set_current($PlayerStats.health_points)
+	apply_dexterity_to_cooldowns()
 
 
 func _process(_delta: float) -> void:
@@ -49,12 +52,18 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("move"):
 		var mouse_pos = get_global_mouse_position()
 		target_position = mouse_pos
-		velocity = (mouse_pos - position).normalized() * SPEED * delta
+		var final_speed = SPEED * $PlayerStats.get_speed_increase() * delta
+		velocity = (mouse_pos - position).normalized() * final_speed
 		$AnimationPlayer.play("player_move_animation")
 	if (position - target_position).length_squared() < position_threshold:
 		velocity = Vector2.ZERO
 		$AnimationPlayer.stop()
 	move_and_slide()
+
+
+func apply_dexterity_to_cooldowns() -> void:
+	if $PlayerStats.get_cooldown_reduction() > 0:
+		$BlinkTimer.wait_time = base_blink_cooldown * $PlayerStats.get_cooldown_reduction()
 
 
 func gain_experience(points: int) -> void:
@@ -106,7 +115,7 @@ func trigger_action_q(direction: Vector2):
 		action.position = position + direction * player_distance
 		action.set_direction(direction)
 		action.set_caster(self)
-		action.base_damage = action.base_damage * $PlayerStats.damage_multiplier
+		action.base_damage = action.base_damage * $PlayerStats.get_damage_multiplier()
 		get_tree().get_first_node_in_group("Arena").add_child(action)
 		trigger_spell_cooldown("Q")
 		$QActionTimer.start()

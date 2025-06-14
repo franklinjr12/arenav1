@@ -82,11 +82,14 @@ speed_scale = 2.0
 [node name="SpriteFlasher" parent="." instance=ExtResource("3_qhqgy")]
 
 [node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
 [node name="PlayerStats" parent="." instance=ExtResource("4_lvxji")]
 health_points = 20
 max_health_points = 20
 damage_multiplier = 1.0
+intelligence = 100
+dexterity = 2
 
 [connection signal="timeout" from="EActionTimer" to="." method="_on_e_action_timer_timeout"]

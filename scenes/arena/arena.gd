@@ -44,6 +44,7 @@ func connect_enemies():
 func add_player(p: Player) -> void:
 	p.position = $PlayerSpawn.position
 	p.is_invulnerable = false
+	player_inst = p
 	add_child(p)
 
 
