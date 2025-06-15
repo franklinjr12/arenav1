@@ -4,6 +4,8 @@ class_name ProjectileSpell
 @export var base_damage: int = 2
 @export var speed_mag = 100
 
+@onready var damage_number_scene: PackedScene = preload("res://scenes/damage_number/damage_number.tscn")
+
 var velocity : Vector2 = Vector2.ZERO
 var direction : Vector2 = Vector2.ZERO
 var who_casted = null
@@ -43,6 +45,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body != who_casted:
 		if body.has_method("suffer_damage"):
 			body.suffer_damage(base_damage)
+		var damage_number = damage_number_scene.instantiate()
+		damage_number.position = position
+		damage_number.text = str(base_damage)
+		get_tree().get_first_node_in_group("Arena").add_child(damage_number)
 		queue_free()
 
 
