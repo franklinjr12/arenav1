@@ -7,6 +7,8 @@ enum State {IDLE, CHASING, ATTACKING}
 
 @export var spell: PackedScene
 
+@onready var experience_orb_scene: PackedScene = preload("res://scenes/experience_orb/experience_orb.tscn")
+
 var last_player_position: Vector2 = Vector2.ZERO
 var current_state: State
 var should_chase: bool = false
@@ -88,5 +90,9 @@ func suffer_damage(number: int):
 	if $EnemyStats.health_points <= 0:
 		var signal_param = {"experience": $EnemyStats.experience_drop}
 		died.emit(signal_param)
+		var experience_orb = experience_orb_scene.instantiate()
+		experience_orb.position = position
+		experience_orb.set_dropped_experience($EnemyStats.experience_drop)
+		get_tree().get_first_node_in_group("Arena").add_child(experience_orb)
 		queue_free()
 	$HealthBar.set_current($EnemyStats.health_points)
