@@ -126,7 +126,13 @@ position = Vector2(195, 194)
 zoom = Vector2(2, 2)
 script = ExtResource("3_ajq0i")
 
-[node name="PlayerSpellsUi" parent="ArenaCamera" instance=ExtResource("4_8vbsj")]
+[node name="ArenaCombatUi" type="Control" parent="ArenaCamera"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerSpellsUi" parent="ArenaCamera/ArenaCombatUi" instance=ExtResource("4_8vbsj")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -138,27 +144,21 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="PlayerHealthBar" parent="ArenaCamera" groups=["PlayerHealthBar"] instance=ExtResource("5_xsx6r")]
+[node name="PlayerHealthBar" parent="ArenaCamera/ArenaCombatUi" groups=["PlayerHealthBar"] instance=ExtResource("5_xsx6r")]
+layout_mode = 1
 offset_left = -280.0
 offset_top = 116.0
 offset_right = -280.0
 offset_bottom = 116.0
 metadata/_edit_use_anchors_ = true
 
-[node name="ArenaTimeLabel" type="Label" parent="ArenaCamera" groups=["ArenaTime"]]
+[node name="ArenaTimeLabel" type="Label" parent="ArenaCamera/ArenaCombatUi" groups=["ArenaTime"]]
+layout_mode = 0
 offset_left = 12.0
 offset_top = -149.0
 offset_right = 52.0
 offset_bottom = -126.0
 text = "000"
-
-[node name="TestLabel" type="Label" parent="ArenaCamera" groups=["TestLabel"]]
-visible = false
-offset_left = 139.0
-offset_top = -154.0
-offset_right = 278.0
-offset_bottom = -83.0
-text = "Test"
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2(172, 283)

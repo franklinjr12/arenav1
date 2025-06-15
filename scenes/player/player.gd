@@ -103,10 +103,10 @@ func suffer_damage(number: int):
 
 
 func trigger_spell_cooldown(spell: String):
-	var q_ui = get_tree().get_first_node_in_group("PlayerSpellsUi").get_node("HBoxContainer/Spell" + spell)
-	if q_ui != null:
-		q_ui.get_node("Timer").wait_time = get_node(spell + "ActionTimer").wait_time
-		q_ui.start_cooldown()
+	var spell_ui: PlayerSpellButton = get_tree().get_first_node_in_group("PlayerSpellButton" + spell)
+	if spell_ui != null:
+		spell_ui.set_wait_time(get_node(spell + "ActionTimer").wait_time)
+		spell_ui.start_cooldown()
 
 
 func trigger_action_q(direction: Vector2):

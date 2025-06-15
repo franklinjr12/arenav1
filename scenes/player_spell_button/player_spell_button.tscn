@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://c35yh1phfp4ae"]
+
+[ext_resource type="Script" uid="uid://tmi23i24i10n" path="res://scenes/player_spell_button/player_spell_button.gd" id="1_bv1ys"]
+[ext_resource type="Texture2D" uid="uid://crgtnk1y6w7w3" path="res://sprites/basic_button_text.png" id="1_kno16"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bv1ys"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+outline_size = 1
+
+[node name="PlayerSpellButton" type="Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bv1ys")
+
+[node name="ButtonSprite" type="Sprite2D" parent="."]
+position = Vector2(20, 20)
+texture = ExtResource("1_kno16")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpellSprite" type="Sprite2D" parent="."]
+position = Vector2(20, 20)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CooldownLabel" type="Label" parent="."]
+visible = false
+texture_filter = 1
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 43.0
+offset_bottom = 38.0
+text = "0.0"
+label_settings = SubResource("LabelSettings_bv1ys")

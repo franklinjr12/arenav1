@@ -41,14 +41,18 @@ func set_lifetime(time: float):
 	$LifetimeTimer.wait_time = time
 
 
+func spawn_damage_number() -> void:
+	var damage_number = damage_number_scene.instantiate()
+	damage_number.position = position
+	damage_number.text = str(base_damage)
+	get_tree().get_first_node_in_group("Arena").add_child(damage_number)
+
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body != who_casted:
 		if body.has_method("suffer_damage"):
 			body.suffer_damage(base_damage)
-		var damage_number = damage_number_scene.instantiate()
-		damage_number.position = position
-		damage_number.text = str(base_damage)
-		get_tree().get_first_node_in_group("Arena").add_child(damage_number)
+			spawn_damage_number()
 		queue_free()
 
 

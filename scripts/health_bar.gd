@@ -1,6 +1,10 @@
 extends Control
 
 func _ready() -> void:
+	# TODO deservers a refactor
+	var parent: Node = get_parent()
+	if parent is EnemyCharacter:
+		return
 	var p: Player = get_tree().get_first_node_in_group("Player")
 	if p != null:
 		set_current(p.get_current_health())
