@@ -14,6 +14,9 @@ var current_arena_time: int = 0
 var player_died: bool = false
 var player_inst: Player = null
 var difficulty: String
+var kills: int = 0
+var player_damage_taken: float = 0
+var enemies_damage_taken: float = 0
 
 func _ready() -> void:
 	reset_enemies()
@@ -31,6 +34,8 @@ func connect_player():
 	var p: Player = get_player()
 	if !p.died.is_connected(on_player_died):
 		p.died.connect(on_player_died)
+	if !p.damaged.is_connected(on_player_damaged):
+		p.damaged.connect(on_player_damaged)
 
 
 func connect_enemies():
@@ -39,6 +44,8 @@ func connect_enemies():
 	for e in enemies:
 		if !e.died.is_connected(on_enemies_died):
 			e.died.connect(on_enemies_died)
+		if !e.damaged.is_connected(on_enemy_damaged):
+			e.damaged.connect(on_enemy_damaged)
 
 
 func add_player(p: Player) -> void:
@@ -67,7 +74,10 @@ func show_arena_end():
 		"result": "defeat" if player_died else "victory",
 		"time": current_arena_time,
 		"grade": completion_grade(),
-		"difficulty": difficulty
+		"difficulty": difficulty,
+		"kills": kills,
+		"player_damage_taken": player_damage_taken,
+		"enemies_damage_taken": enemies_damage_taken
 	}
 	combat_ended.emit(params)
 
@@ -122,12 +132,21 @@ func on_player_died():
 	show_arena_end()
 
 
+func on_player_damaged(damage: float) -> void:
+	player_damage_taken += damage
+
+
+func on_enemy_damaged(damage: float) -> void:
+	enemies_damage_taken += damage
+
+
 func on_enemies_died(param: Dictionary):
 	if param != null:
 		if param.has("experience"):
 			var drop_exp: int = param["experience"]
 			get_player().gain_experience(drop_exp)
 	current_enemies_count -= 1
+	kills += 1
 	if current_enemies_count == 0:
 		show_arena_end()
 

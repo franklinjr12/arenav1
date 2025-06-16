@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 signal died
+signal damaged
 
 @export var SPEED = 4000.0
 @export var player_distance = 20
@@ -95,6 +96,7 @@ func suffer_damage(number: int):
 		return
 	$SpriteFlasher.flash()
 	$PlayerStats.health_points -= number
+	damaged.emit(number)
 	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
 	if health_bar != null:
 		health_bar.set_current($PlayerStats.health_points)

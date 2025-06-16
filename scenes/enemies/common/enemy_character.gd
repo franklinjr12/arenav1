@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name EnemyCharacter
 
 signal died
+signal damaged
 
 enum State {IDLE, CHASING, ATTACKING}
 
@@ -87,6 +88,7 @@ func get_player() -> Player:
 func suffer_damage(number: int):
 	$SpriteFlasher.flash()
 	$EnemyStats.health_points -= number
+	damaged.emit(number)
 	if $EnemyStats.health_points <= 0:
 		var signal_param = {"experience": $EnemyStats.experience_drop}
 		died.emit(signal_param)

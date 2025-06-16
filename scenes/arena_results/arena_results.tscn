@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://vxvkoid3276j"]
+[gd_scene load_steps=4 format=3 uid="uid://vxvkoid3276j"]
 
 [ext_resource type="Script" uid="uid://7wyts0dnyqm0" path="res://scenes/arena_results/arena_results.gd" id="1_sxpwp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sxpwp"]
+font_color = Color(0, 100, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tocar"]
+font_color = Color(0.870268, 0.0566727, 0.0328229, 1)
 
 [node name="ArenaResultsUi" type="Control" groups=["ArenaResults"]]
 layout_mode = 3
@@ -28,11 +34,13 @@ grow_vertical = 2
 [node name="VictoryLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Victory"
+label_settings = SubResource("LabelSettings_sxpwp")
 horizontal_alignment = 1
 
 [node name="DefeatLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Defeat"
+label_settings = SubResource("LabelSettings_tocar")
 horizontal_alignment = 1
 
 [node name="DifficultyLabel" type="Label" parent="VBoxContainer"]
@@ -69,6 +77,22 @@ horizontal_alignment = 1
 [node name="ClearedArenasLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Arenas 0"
+horizontal_alignment = 1
+
+[node name="PlayerDamagedLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Damage taken 0"
+horizontal_alignment = 1
+
+[node name="EnemyDamagedLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Damage given 0"
+horizontal_alignment = 1
+
+[node name="KillsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Kills 0"
+horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2

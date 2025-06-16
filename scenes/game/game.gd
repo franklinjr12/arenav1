@@ -6,7 +6,7 @@ extends Node2D
 @onready var arena_difficulty_scene: PackedScene = preload("res://scenes/arena_difficulty_selection/arena_difficulty_selection.tscn")
 @onready var arena_results_scene: PackedScene = preload("res://scenes/arena_results/arena_results.tscn")
 
-const ARENA_FIGHTS_TO_PROCEED: int = 3
+const ARENA_FIGHTS_TO_PROCEED: int = 2
 
 var arena_difficulty_option: String
 var player_died: bool = false
