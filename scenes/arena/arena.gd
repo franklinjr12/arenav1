@@ -125,7 +125,7 @@ func on_player_died():
 func on_enemies_died(param: Dictionary):
 	if param != null:
 		if param.has("experience"):
-			var drop_exp:int = param["experience"]
+			var drop_exp: int = param["experience"]
 			get_player().gain_experience(drop_exp)
 	current_enemies_count -= 1
 	if current_enemies_count == 0:

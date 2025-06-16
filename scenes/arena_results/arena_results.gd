@@ -17,6 +17,7 @@ func set_results(params: Dictionary) -> void:
 	$VBoxContainer/DifficultyLabel.text = params["difficulty"]
 	$VBoxContainer/HBoxContainer/TimeValue.text = "%03d" % params["time"]
 	$VBoxContainer/HBoxContainer2/GradeValue.text = params["grade"]
+	$VBoxContainer/ClearedArenasLabel.text = "Arenas %d" % params["arenas_completed"]
 
 
 func _on_button_pressed() -> void:

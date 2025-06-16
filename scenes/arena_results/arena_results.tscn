@@ -66,6 +66,10 @@ layout_mode = 2
 text = "F"
 horizontal_alignment = 1
 
+[node name="ClearedArenasLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Arenas 0"
+
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Continue"

@@ -6,8 +6,12 @@ extends Node2D
 @onready var arena_difficulty_scene: PackedScene = preload("res://scenes/arena_difficulty_selection/arena_difficulty_selection.tscn")
 @onready var arena_results_scene: PackedScene = preload("res://scenes/arena_results/arena_results.tscn")
 
+const ARENA_FIGHTS_TO_PROCEED: int = 3
+
 var arena_difficulty_option: String
 var player_died: bool = false
+var arena_fights_completed: int = 0
+var arena_results_array: Array[Dictionary] = []
 
 func _ready() -> void:
 	create_difficulty_screen()
@@ -38,14 +42,37 @@ func create_arena_results_screen(params: Dictionary) -> void:
 	add_child(results_inst)
 
 
+func create_fights_completed_screen() -> void:
+	var scene: PackedScene = load("res://scenes/arena_fights_completed/arena_fights_completed.tscn")
+	var fights_completed: ArenaFightsCompleted = scene.instantiate()
+	fights_completed.set_results(arena_results_array)
+	fights_completed.continue_pressed.connect(on_arena_fights_completed_continue)
+	add_child(fights_completed)
+
+
 func on_arena_ended(params: Dictionary):
+	arena_fights_completed += 1
+	params["arenas_completed"] = arena_fights_completed
 	var arena: Arena = get_tree().get_first_node_in_group("Arena")
 	if arena != null:
 		var n: Node = arena.get_node(NodePath(player.name))
 		if n != null:
 			arena.remove_child(player)
 		arena.queue_free()
-	create_arena_results_screen(params)
+	arena_results_array.append(params)
+	if arena_fights_completed >= ARENA_FIGHTS_TO_PROCEED:
+		create_fights_completed_screen()
+	else:
+		create_arena_results_screen(params)
+
+
+func on_arena_fights_completed_continue() -> void:
+	arena_fights_completed = 0
+	arena_results_array = []
+	var n: Node = get_tree().get_first_node_in_group("ArenaFightsCompleted")
+	if n != null:
+		remove_child(n)
+	create_difficulty_screen()
 
 
 func on_difficulty_selected(option: String):
