@@ -3,6 +3,7 @@ class_name Player
 
 signal died
 signal damaged
+signal levelled_up
 
 @export var SPEED = 4000.0
 @export var player_distance = 20
@@ -166,3 +167,4 @@ func on_level_up():
 	if health_bar != null:
 		health_bar.set_max($PlayerStats.health_points)
 		health_bar.set_current($PlayerStats.health_points)
+	levelled_up.emit()

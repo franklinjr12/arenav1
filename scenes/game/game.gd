@@ -6,16 +6,18 @@ extends Node2D
 @onready var arena_difficulty_scene: PackedScene = preload("res://scenes/arena_difficulty_selection/arena_difficulty_selection.tscn")
 @onready var arena_results_scene: PackedScene = preload("res://scenes/arena_results/arena_results.tscn")
 
-const ARENA_FIGHTS_TO_PROCEED: int = 2
+const ARENA_FIGHTS_TO_PROCEED: int = 3
 
 var arena_difficulty_option: String
 var player_died: bool = false
 var arena_fights_completed: int = 0
 var arena_results_array: Array[Dictionary] = []
+var player_levelled_up: bool = false
 
 func _ready() -> void:
 	create_difficulty_screen()
 	player.died.connect(on_player_died)
+	player.levelled_up.connect(on_player_level_up)
 
 
 func create_arena(difficulty: String) -> void:
@@ -50,6 +52,14 @@ func create_fights_completed_screen() -> void:
 	add_child(fights_completed)
 
 
+func create_player_level_up_screen() -> void:
+	var scene: PackedScene = load("res://scenes/player_level_up/player_level_up.tscn")
+	var level_up_screen = scene.instantiate()
+	level_up_screen.player_stats = player.get_node("PlayerStats")
+	level_up_screen.continue_pressed.connect(on_player_level_up_continue_pressed)
+	add_child(level_up_screen)
+
+
 func on_arena_ended(params: Dictionary):
 	arena_fights_completed += 1
 	params["arenas_completed"] = arena_fights_completed
@@ -72,7 +82,11 @@ func on_arena_fights_completed_continue() -> void:
 	var n: Node = get_tree().get_first_node_in_group("ArenaFightsCompleted")
 	if n != null:
 		remove_child(n)
-	create_difficulty_screen()
+	if player_levelled_up:
+		player_levelled_up = false
+		create_player_level_up_screen()
+	else:
+		create_difficulty_screen()
 
 
 func on_difficulty_selected(option: String):
@@ -87,6 +101,17 @@ func on_difficulty_selected(option: String):
 func on_player_died() -> void:
 	player_died = true
 
+
+func on_player_level_up() -> void:
+	player_levelled_up = true
+
+
+func on_player_level_up_continue_pressed() -> void:
+	var node = get_tree().get_first_node_in_group("PlayerLevelUp")
+	if node != null:
+		remove_child(node)
+		node.queue_free()
+	create_difficulty_screen()
 
 func on_results_continue_pressed() -> void:
 	var node = get_tree().get_first_node_in_group("ArenaResults")

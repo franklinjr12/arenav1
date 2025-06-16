@@ -1,3 +1,4 @@
+class_name PlayerStats
 extends Node
 
 signal levelled_up
@@ -18,13 +19,15 @@ const base_level_up: int = 10
 const max_attribute_value: int = 10
 
 var last_experience_points: int = 0
+var available_attribute_points: int = 0
 
 func gain_experience_points(value: int) -> void:
-	experience_points += value * (float(luck - 1) / max_attribute_value)
+	experience_points += value *  (1 + (float(luck - 1) / max_attribute_value))
 	var needed_points = last_experience_points + base_level_up * (level + 1)
 	if experience_points > needed_points:
 		last_experience_points = experience_points
 		level += 1
+		available_attribute_points += 1
 		var param: Dictionary = {"level": level}
 		levelled_up.emit(param)
 		# not sure why signal is not triggering

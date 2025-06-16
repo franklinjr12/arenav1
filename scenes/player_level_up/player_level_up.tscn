@@ -1,0 +1,103 @@
+[gd_scene load_steps=3 format=3 uid="uid://fcgjg5un81xq"]
+
+[ext_resource type="Script" uid="uid://b38grit3idleh" path="res://scenes/player_level_up/player_level_up.gd" id="1_viau6"]
+[ext_resource type="Texture2D" uid="uid://crgtnk1y6w7w3" path="res://sprites/basic_button_text.png" id="2_wtcln"]
+
+[node name="PlayerLevelUp" type="Control" groups=["PlayerLevelUp"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_viau6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Intelligence" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Intelligence"
+
+[node name="IntelligenceValue" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="IntelligenceButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_wtcln")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Dexterity" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Dexterity"
+
+[node name="DexterityValue" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "0"
+
+[node name="DexterityButton" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+icon = ExtResource("2_wtcln")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Swiftness" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Swiftness"
+
+[node name="SwiftnessValue" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "0"
+
+[node name="SwiftnessButton" type="Button" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+icon = ExtResource("2_wtcln")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Vitality" type="Label" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Vitality"
+
+[node name="VitalityValue" type="Label" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "0"
+
+[node name="VitalityButton" type="Button" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+icon = ExtResource("2_wtcln")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Luck" type="Label" parent="VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "Luck"
+
+[node name="LuckValue" type="Label" parent="VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "0"
+
+[node name="LuckButton" type="Button" parent="VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+icon = ExtResource("2_wtcln")
+
+[node name="AvailableAttributePointsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Available points 0"
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
