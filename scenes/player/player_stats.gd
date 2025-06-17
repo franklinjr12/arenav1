@@ -7,6 +7,7 @@ signal levelled_up
 @export var max_health_points: int = 100
 @export var experience_points: int = 0
 @export var level: int = 0
+@export var gold: int = 0
 @export var damage_multiplier: float = 10
 
 @export var intelligence: int = 1 # affects damage_multiplier

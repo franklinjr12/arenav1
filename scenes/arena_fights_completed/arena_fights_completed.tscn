@@ -56,6 +56,11 @@ horizontal_alignment = 1
 
 [node name="TotalExperience" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+text = "Total experience 0"
+
+[node name="TotalGold" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Total gold 0"
 
 [node name="ContinueButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2

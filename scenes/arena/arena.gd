@@ -18,6 +18,7 @@ var kills: int = 0
 var player_damage_taken: float = 0
 var enemies_damage_taken: float = 0
 var player_experience_gained: float = 0
+var gold_to_gain: int = 0
 
 func _ready() -> void:
 	reset_enemies()
@@ -79,7 +80,8 @@ func show_arena_end():
 		"kills": kills,
 		"player_damage_taken": player_damage_taken,
 		"enemies_damage_taken": enemies_damage_taken,
-		"player_experience_gained": player_experience_gained
+		"player_experience_gained": player_experience_gained,
+		"gold": gold_to_gain
 	}
 	combat_ended.emit(params)
 
@@ -148,6 +150,9 @@ func on_enemies_died(param: Dictionary):
 			var drop_exp: int = param["experience"]
 			player_experience_gained += drop_exp
 			get_player().gain_experience(drop_exp)
+		if param.has("gold"):
+			var drop_gold: int = param["gold"]
+			gold_to_gain += drop_gold
 	current_enemies_count -= 1
 	kills += 1
 	if current_enemies_count == 0:

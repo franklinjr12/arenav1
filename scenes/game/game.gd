@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player: Player = preload("res://scenes/player/player.tscn").instantiate()
 
+# TODO probably can remove those preloads to just loads
 @onready var arena_scene: PackedScene = preload("res://scenes/arena/arena.tscn")
 @onready var arena_difficulty_scene: PackedScene = preload("res://scenes/arena_difficulty_selection/arena_difficulty_selection.tscn")
 @onready var arena_results_scene: PackedScene = preload("res://scenes/arena_results/arena_results.tscn")
@@ -56,6 +57,8 @@ func create_fights_completed_screen() -> void:
 	fights_completed.set_results(arena_results_array)
 	fights_completed.continue_pressed.connect(on_arena_fights_completed_continue)
 	add_child(fights_completed)
+	# give the total gold to player after completed all fights
+	player.gain_gold(fights_completed.total_gold)
 
 
 func create_player_character_screen() -> void:

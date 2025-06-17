@@ -80,12 +80,24 @@ func get_experience() -> int:
 	return $PlayerStats.experience_points
 
 
+func get_gold() -> int:
+	return $PlayerStats.gold
+
+
 func get_level() -> int:
 	return $PlayerStats.level
 
 
 func get_max_health() -> int:
 	return $PlayerStats.max_health_points
+
+
+func gain_gold(amount: int) -> void:
+	$PlayerStats.gold += amount
+
+
+func loose_gold(amount: int) -> void:
+	$PlayerStats.gold -= amount
 
 
 func set_initial_values() -> void:

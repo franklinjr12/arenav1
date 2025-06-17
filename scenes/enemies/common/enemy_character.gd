@@ -90,7 +90,10 @@ func suffer_damage(number: int):
 	$EnemyStats.health_points -= number
 	damaged.emit(number)
 	if $EnemyStats.health_points <= 0:
-		var signal_param = {"experience": $EnemyStats.experience_drop}
+		var signal_param = {
+			"experience": $EnemyStats.experience_drop,
+			"gold": $EnemyStats.gold_drop
+		}
 		died.emit(signal_param)
 		var experience_orb = experience_orb_scene.instantiate()
 		experience_orb.position = position

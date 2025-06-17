@@ -6,5 +6,6 @@ class_name EnemyStats
 @export var cast_distance: int = 20
 @export var chase_range: int = 300
 @export var experience_drop: int = 4
+@export var gold_drop: int = 1
 @export var health_points: float = 5
 @export var speed_multiplier: int = 2500

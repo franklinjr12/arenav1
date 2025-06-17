@@ -18,6 +18,7 @@ func set_labels() -> void:
 	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerHealthLabel.text = "Health {0}/{1}".format([stats.health_points, stats.max_health_points])
 	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerLevelLabel.text = "Level %d" % stats.level
 	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerExperienceLabel.text = "Experience %d" % stats.experience_points
+	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerGoldLabel.text = "Gold %d" % stats.gold
 
 
 func _on_continue_button_pressed() -> void:
