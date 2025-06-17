@@ -4,6 +4,8 @@ class_name Player
 signal died
 signal damaged
 signal levelled_up
+signal gold_changed
+signal health_changed
 
 @export var SPEED = 4000.0
 @export var player_distance = 20
@@ -84,6 +86,14 @@ func get_gold() -> int:
 	return $PlayerStats.gold
 
 
+func heal(amount: int) -> void:
+	if $PlayerStats.health_points + amount > $PlayerStats.max_health_points:
+		$PlayerStats.health_points = $PlayerStats.max_health_points
+	else:
+		$PlayerStats.health_points += amount
+	health_changed.emit($PlayerStats.health_points)
+
+
 func get_level() -> int:
 	return $PlayerStats.level
 
@@ -94,14 +104,17 @@ func get_max_health() -> int:
 
 func gain_gold(amount: int) -> void:
 	$PlayerStats.gold += amount
+	gold_changed.emit($PlayerStats.gold)
 
 
 func loose_gold(amount: int) -> void:
 	$PlayerStats.gold -= amount
+	gold_changed.emit($PlayerStats.gold)
 
 
 func set_initial_values() -> void:
 	$PlayerStats.health_points = $PlayerStats.max_health_points
+	health_changed.emit($PlayerStats.health_points)
 
 
 func suffer_damage(number: int):
@@ -110,6 +123,7 @@ func suffer_damage(number: int):
 	$SpriteFlasher.flash()
 	$PlayerStats.health_points -= number
 	damaged.emit(number)
+	health_changed.emit($PlayerStats.health_points)
 	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")
 	if health_bar != null:
 		health_bar.set_current($PlayerStats.health_points)

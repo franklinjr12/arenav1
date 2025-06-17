@@ -25,6 +25,10 @@ offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ArenaButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Got to arena"
+
 [node name="CharacterSheetButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Character Sheet"
@@ -37,14 +41,10 @@ text = "Spell shop"
 layout_mode = 2
 text = "Gear shop"
 
-[node name="ArenaButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Got to arena"
-
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer/CharacterSheetButton" to="." method="_on_character_sheet_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ArenaButton" to="." method="_on_arena_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CharacterSheetButton" to="." method="_on_character_sheet_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

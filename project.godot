@@ -10,13 +10,16 @@ config_version=5
 
 [application]
 
-config/name="BattlemageArenaV2"
+config/name="BattlemageArena"
 run/main_scene="uid://cotssc72bpfg"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/image="uid://ddrlfhqyakqff"
 config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
