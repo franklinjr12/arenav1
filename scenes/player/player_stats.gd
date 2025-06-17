@@ -43,4 +43,4 @@ func get_damage_multiplier() -> float:
 
 
 func get_speed_increase() -> float:
-	return 1 + (float(swiftness - 1) * max_attribute_value)
+	return 1 + (float(swiftness - 1) / max_attribute_value)

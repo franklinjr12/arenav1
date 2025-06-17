@@ -10,6 +10,14 @@ func _ready() -> void:
 	level_up_node = $CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlayerLevelUp
 	level_up_node.hide_continue_button()
 	level_up_node.set_player_stats(player.get_node("PlayerStats"))
+	set_labels()
+
+
+func set_labels() -> void:
+	var stats: PlayerStats = player.get_node("PlayerStats")
+	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerHealthLabel.text = "Health {0}/{1}".format([stats.health_points, stats.max_health_points])
+	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerLevelLabel.text = "Level %d" % stats.level
+	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayerExperienceLabel.text = "Experience %d" % stats.experience_points
 
 
 func _on_continue_button_pressed() -> void:

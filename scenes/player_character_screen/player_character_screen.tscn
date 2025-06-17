@@ -36,7 +36,15 @@ text = "Stats"
 
 [node name="PlayerHealthLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Current health 100"
+text = "Health 100/100"
+
+[node name="PlayerLevelLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level 0"
+
+[node name="PlayerExperienceLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Experience 0"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
