@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://by3otsigfc13l"]
+
+[ext_resource type="Script" uid="uid://bns0eo0kbjot8" path="res://scenes/city_menu/city_menu.gd" id="1_hnlkv"]
+
+[node name="CityMenu" type="Control" groups=["CityMenu"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hnlkv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -68.0
+offset_right = 66.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterSheetButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Character Sheet"
+
+[node name="SpellShopButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Spell shop"
+
+[node name="GearShopButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Gear shop"
+
+[node name="ArenaButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Got to arena"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/CharacterSheetButton" to="." method="_on_character_sheet_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ArenaButton" to="." method="_on_arena_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://l2wq5xfh4r8s"]
+
+[ext_resource type="Script" uid="uid://dk84hjnv6v74i" path="res://scenes/player_character_screen/player_character_screen.gd" id="1_xnuxa"]
+[ext_resource type="PackedScene" uid="uid://fcgjg5un81xq" path="res://scenes/player_level_up/player_level_up.tscn" id="2_gb37n"]
+[ext_resource type="Texture2D" uid="uid://crgtnk1y6w7w3" path="res://sprites/basic_button_text.png" id="2_gqyka"]
+
+[node name="PlayerCharacterScreen" type="Control" groups=["PlayerCharacterScreen"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xnuxa")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Stats" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stats"
+
+[node name="PlayerHealthLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Current health 100"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SkillQ" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_gqyka")
+
+[node name="SkillW" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_gqyka")
+
+[node name="SkillE" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_gqyka")
+
+[node name="SkillR" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_gqyka")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Attributes" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Attributes"
+
+[node name="PlayerLevelUp" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("2_gb37n")]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

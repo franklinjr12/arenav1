@@ -21,6 +21,7 @@ func set_results(params: Dictionary) -> void:
 	$VBoxContainer/PlayerDamagedLabel.text = "Damage taken %d" % params["player_damage_taken"]
 	$VBoxContainer/EnemyDamagedLabel.text = "Damage given %d" % params["enemies_damage_taken"]
 	$VBoxContainer/KillsLabel.text = "Kills %d" % params["kills"]
+	$VBoxContainer/ExperienceLabel.text = "Experience gained %d" % params["player_experience_gained"]
 
 
 func _on_button_pressed() -> void:

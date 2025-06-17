@@ -17,6 +17,7 @@ var difficulty: String
 var kills: int = 0
 var player_damage_taken: float = 0
 var enemies_damage_taken: float = 0
+var player_experience_gained: float = 0
 
 func _ready() -> void:
 	reset_enemies()
@@ -77,7 +78,8 @@ func show_arena_end():
 		"difficulty": difficulty,
 		"kills": kills,
 		"player_damage_taken": player_damage_taken,
-		"enemies_damage_taken": enemies_damage_taken
+		"enemies_damage_taken": enemies_damage_taken,
+		"player_experience_gained": player_experience_gained
 	}
 	combat_ended.emit(params)
 
@@ -144,6 +146,7 @@ func on_enemies_died(param: Dictionary):
 	if param != null:
 		if param.has("experience"):
 			var drop_exp: int = param["experience"]
+			player_experience_gained += drop_exp
 			get_player().gain_experience(drop_exp)
 	current_enemies_count -= 1
 	kills += 1

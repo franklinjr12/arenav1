@@ -6,7 +6,7 @@ extends Node2D
 @onready var arena_difficulty_scene: PackedScene = preload("res://scenes/arena_difficulty_selection/arena_difficulty_selection.tscn")
 @onready var arena_results_scene: PackedScene = preload("res://scenes/arena_results/arena_results.tscn")
 
-const ARENA_FIGHTS_TO_PROCEED: int = 3
+const ARENA_FIGHTS_TO_PROCEED: int = 1
 
 var arena_difficulty_option: String
 var player_died: bool = false
@@ -15,7 +15,7 @@ var arena_results_array: Array[Dictionary] = []
 var player_levelled_up: bool = false
 
 func _ready() -> void:
-	create_difficulty_screen()
+	create_city_menu_screen()
 	player.died.connect(on_player_died)
 	player.levelled_up.connect(on_player_level_up)
 
@@ -44,12 +44,26 @@ func create_arena_results_screen(params: Dictionary) -> void:
 	add_child(results_inst)
 
 
+func create_city_menu_screen() -> void:
+	var scene: PackedScene = load("res://scenes/city_menu/city_menu.tscn")
+	var city: Control = scene.instantiate()
+	add_child(city)
+
+
 func create_fights_completed_screen() -> void:
 	var scene: PackedScene = load("res://scenes/arena_fights_completed/arena_fights_completed.tscn")
 	var fights_completed: ArenaFightsCompleted = scene.instantiate()
 	fights_completed.set_results(arena_results_array)
 	fights_completed.continue_pressed.connect(on_arena_fights_completed_continue)
 	add_child(fights_completed)
+
+
+func create_player_character_screen() -> void:
+	var scene: PackedScene = load("res://scenes/player_character_screen/player_character_screen.tscn")
+	var node = scene.instantiate()
+	node.continue_pressed.connect(on_player_character_screen_continue_pressed)
+	node.player = player
+	add_child(node)
 
 
 func create_player_level_up_screen() -> void:
@@ -65,7 +79,7 @@ func on_arena_ended(params: Dictionary):
 	params["arenas_completed"] = arena_fights_completed
 	var arena: Arena = get_tree().get_first_node_in_group("Arena")
 	if arena != null:
-		var n: Node = arena.get_node(NodePath(player.name))
+		var n: Node = arena.get_node_or_null(NodePath(player.name))
 		if n != null:
 			arena.remove_child(player)
 		arena.queue_free()
@@ -86,7 +100,7 @@ func on_arena_fights_completed_continue() -> void:
 		player_levelled_up = false
 		create_player_level_up_screen()
 	else:
-		create_difficulty_screen()
+		create_city_menu_screen()
 
 
 func on_difficulty_selected(option: String):
@@ -96,6 +110,13 @@ func on_difficulty_selected(option: String):
 		remove_child(node)
 		node.queue_free()
 	create_arena(option)
+
+
+func on_player_character_screen_continue_pressed() -> void:
+	var n: Node = get_node_or_null("PlayerCharacterScreen")
+	if n != null:
+		n.queue_free()
+	create_city_menu_screen()
 
 
 func on_player_died() -> void:
@@ -111,7 +132,8 @@ func on_player_level_up_continue_pressed() -> void:
 	if node != null:
 		remove_child(node)
 		node.queue_free()
-	create_difficulty_screen()
+	create_city_menu_screen()
+
 
 func on_results_continue_pressed() -> void:
 	var node = get_tree().get_first_node_in_group("ArenaResults")

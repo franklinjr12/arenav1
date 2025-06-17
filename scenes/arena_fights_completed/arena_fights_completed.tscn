@@ -54,6 +54,9 @@ visible = false
 layout_mode = 2
 horizontal_alignment = 1
 
+[node name="TotalExperience" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
 [node name="ContinueButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Continue"
