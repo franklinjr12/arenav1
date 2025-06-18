@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://dxb17qgwkfuqi"]
 
 [ext_resource type="Script" uid="uid://bbcsggrjlncfa" path="res://scenes/enemies/common/enemy_character.gd" id="1_n42a1"]
-[ext_resource type="Texture2D" uid="uid://8odcr6rr6cga" path="res://scenes/enemies/brawler/skeleton.png" id="1_q0wsr"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="2_3j7o2"]
 [ext_resource type="PackedScene" uid="uid://bpiqdllq5i4td" path="res://scenes/spells/melee_spell.tscn" id="2_215y0"]
+[ext_resource type="Texture2D" uid="uid://dvpgnykb17ujy" path="res://scenes/enemies/brawler/skelleton2.png" id="3_jsd5w"]
 [ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="3_xie8d"]
 [ext_resource type="PackedScene" uid="uid://5m5dv8wp21pn" path="res://scenes/enemies/common/enemy_stats/enemy_stats.tscn" id="5_n42a1"]
 
@@ -106,8 +106,8 @@ script = ExtResource("1_n42a1")
 spell = ExtResource("2_215y0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_q0wsr")
+scale = Vector2(1.595, 1.595)
+texture = ExtResource("3_jsd5w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n60ya")

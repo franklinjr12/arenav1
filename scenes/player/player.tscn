@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bh7ryb0mb3rh0"]
 
 [ext_resource type="Script" uid="uid://cxalnlsqejr3s" path="res://scenes/player/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://dyb8c676sbs5v" path="res://sprites/magev1.png" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://bq4ea0g35b1gs" path="res://scenes/player/player_stats.tscn" id="4_lvxji"]
+[ext_resource type="Texture2D" uid="uid://bd1545o7hqq4l" path="res://scenes/player/character1.png" id="5_p47bc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
 radius = 5.5
@@ -53,7 +53,7 @@ script = ExtResource("1_g2els")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(1.67, 1.67)
-texture = ExtResource("2_g2els")
+texture = ExtResource("5_p47bc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0.5)
@@ -90,6 +90,5 @@ one_shot = true
 health_points = 20
 max_health_points = 20
 damage_multiplier = 1.0
-intelligence = 100
 
 [connection signal="timeout" from="EActionTimer" to="." method="_on_e_action_timer_timeout"]

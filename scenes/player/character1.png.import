@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyb8c676sbs5v"
-path="res://.godot/imported/magev1.png-59bc3a216db88665ff0190c9199f89c3.ctex"
+uid="uid://bd1545o7hqq4l"
+path="res://.godot/imported/character1.png-bd17ff21f759c598a38b62d80b629033.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/magev1.png"
-dest_files=["res://.godot/imported/magev1.png-59bc3a216db88665ff0190c9199f89c3.ctex"]
+source_file="res://scenes/player/character1.png"
+dest_files=["res://.godot/imported/character1.png-bd17ff21f759c598a38b62d80b629033.ctex"]
 
 [params]
 
