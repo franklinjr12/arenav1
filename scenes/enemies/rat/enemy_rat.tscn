@@ -136,6 +136,6 @@ libraries = {
 
 [node name="EnemyStats" parent="." instance=ExtResource("5_1qih3")]
 attack_range = 40
-experience_drop = 2
-health_points = 3.0
+experience_drop = 1
+health_points = 6.0
 speed_multiplier = 6000

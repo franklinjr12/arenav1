@@ -124,9 +124,11 @@ scale = Vector2(0.18, 0.18)
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="EnemyStats" parent="." instance=ExtResource("5_n42a1")]
-attack_range = 40
+attack_range = 30
+attack_wait_time = 0.3
+experience_drop = 3
 health_points = 10.0
-speed_multiplier = 6000
+speed_multiplier = 6400
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

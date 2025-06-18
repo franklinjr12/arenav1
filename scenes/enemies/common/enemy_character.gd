@@ -7,6 +7,7 @@ signal damaged
 enum State {IDLE, CHASING, ATTACKING}
 
 @export var spell: PackedScene
+@export var stats: EnemyStats
 
 @onready var experience_orb_scene: PackedScene = preload("res://scenes/experience_orb/experience_orb.tscn")
 
@@ -18,38 +19,18 @@ var should_attack: bool = false
 func _ready() -> void:
 	current_state = State.IDLE
 	$AttackTimer.one_shot = true
+	stats = $EnemyStats
 	$AttackTimer.wait_time = $EnemyStats.attack_wait_time
 	$HealthBar.set_max($EnemyStats.health_points)
 	$HealthBar.set_current($EnemyStats.health_points)
 
 
 func _process(_delta: float) -> void:
-	var player: Player = get_player()
-	if player != null:
-		var distance = player.position - position
-		var distance_length = distance.length()
-		last_player_position = position + distance
-		match current_state:
-			State.IDLE:
-				if distance_length < $EnemyStats.chase_range:
-					current_state = State.CHASING
-					should_chase = true
-			State.CHASING:
-				if distance_length <= $EnemyStats.attack_range && can_attack():
-					current_state = State.ATTACKING
-					should_chase = false
-				elif distance_length > $EnemyStats.chase_range:
-					current_state = State.IDLE
-					should_chase = false
-			State.ATTACKING:
-				if can_attack():
-					should_attack = true
-				if distance_length > $EnemyStats.attack_range:
-					current_state = State.CHASING
-					should_chase = true
+	pass
 
 
 func _physics_process(delta: float) -> void:
+	run_state_machine()
 	if should_attack:
 		should_attack = false
 		$AnimationPlayer.play("attack")
@@ -84,6 +65,31 @@ func instantiate_attack():
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("Player")
 
+
+func run_state_machine() -> void:
+	var player: Player = get_player()
+	if player != null:
+		var distance = player.position - position
+		var distance_length = distance.length()
+		last_player_position = position + distance
+		match current_state:
+			State.IDLE:
+				if distance_length < $EnemyStats.chase_range:
+					current_state = State.CHASING
+					should_chase = true
+			State.CHASING:
+				if distance_length <= $EnemyStats.attack_range && can_attack():
+					current_state = State.ATTACKING
+					should_chase = false
+				elif distance_length > $EnemyStats.chase_range:
+					current_state = State.IDLE
+					should_chase = false
+			State.ATTACKING:
+				if can_attack():
+					should_attack = true
+				if distance_length > $EnemyStats.attack_range:
+					current_state = State.CHASING
+					should_chase = true
 
 func suffer_damage(number: int):
 	$SpriteFlasher.flash()

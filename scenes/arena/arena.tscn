@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3dsqwya6cp26"]
+[gd_scene load_steps=8 format=3 uid="uid://c3dsqwya6cp26"]
 
 [ext_resource type="Script" uid="uid://cgkiqcc8cwnhb" path="res://scenes/arena/arena.gd" id="1_41jku"]
 [ext_resource type="Resource" uid="uid://m5q3ny3cxbdf" path="res://scenes/arena/enemies_difficulty/enemies_difficulty.tres" id="2_2ml6w"]
@@ -6,9 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://pxj1q1yp6uq1" path="res://sprites/arenav1.png" id="3_xgbxb"]
 [ext_resource type="PackedScene" uid="uid://biufh30s7k4is" path="res://scenes/player_spells_ui.tscn" id="4_8vbsj"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="5_xsx6r"]
-[ext_resource type="PackedScene" uid="uid://dxb17qgwkfuqi" path="res://scenes/enemies/brawler/enemy_brawler.tscn" id="8_ow1aj"]
-[ext_resource type="PackedScene" uid="uid://r3m0cdc7ro1x" path="res://scenes/enemies/caster/enemy_caster.tscn" id="9_6joey"]
-[ext_resource type="PackedScene" uid="uid://c22rghoo0f1rv" path="res://scenes/enemies/rat/enemy_rat.tscn" id="10_7wjmx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xgbxb"]
 size = Vector2(328, 248)
@@ -161,24 +158,35 @@ offset_bottom = -126.0
 text = "000"
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
-position = Vector2(172, 283)
+position = Vector2(188, 283)
 
-[node name="EnemyBrawler" parent="." instance=ExtResource("8_ow1aj")]
-position = Vector2(599, 135)
+[node name="EnemiesSpawn" type="Node" parent="."]
 
-[node name="EnemyCaster" parent="." instance=ExtResource("9_6joey")]
-position = Vector2(582, 281)
-
-[node name="EnemySpawn1" type="Node2D" parent="."]
+[node name="EnemySpawn1" type="Node2D" parent="EnemiesSpawn" groups=["EnemySpawn"]]
 position = Vector2(603, 478)
 
-[node name="EnemySpawn2" type="Node2D" parent="."]
+[node name="EnemySpawn2" type="Node2D" parent="EnemiesSpawn" groups=["EnemySpawn"]]
 position = Vector2(598, 137)
 
-[node name="EnemySpawn3" type="Node2D" parent="."]
+[node name="EnemySpawn3" type="Node2D" parent="EnemiesSpawn" groups=["EnemySpawn"]]
 position = Vector2(604, 289)
 
-[node name="EnemyRat" parent="." instance=ExtResource("10_7wjmx")]
-position = Vector2(603, 475)
+[node name="EnemySpawn4" type="Node2D" parent="EnemiesSpawn" groups=["EnemySpawn"]]
+position = Vector2(734, 403)
+
+[node name="EnemySpawn5" type="Node2D" parent="EnemiesSpawn" groups=["EnemySpawn"]]
+position = Vector2(778, 153)
+
+[node name="EnemySpawn6" type="Node2D" parent="EnemiesSpawn" groups=["EnemySpawn"]]
+position = Vector2(780, 273)
+
+[node name="EnemySpawn7" type="Node2D" parent="EnemiesSpawn" groups=["EnemySpawn"]]
+position = Vector2(921, 285)
+
+[node name="EnemySpawn8" type="Node2D" parent="EnemiesSpawn" groups=["EnemySpawn"]]
+position = Vector2(667, 67)
+
+[node name="EnemySpawn9" type="Node2D" parent="EnemiesSpawn" groups=["EnemySpawn"]]
+position = Vector2(676, 531)
 
 [connection signal="timeout" from="CombatTimer" to="." method="_on_combat_timer_timeout"]

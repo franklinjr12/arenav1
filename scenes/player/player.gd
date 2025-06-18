@@ -9,6 +9,7 @@ signal health_changed
 
 @export var SPEED = 4000.0
 @export var player_distance = 20
+@export var stats: PlayerStats
 
 @onready var basic_spell = preload("res://scenes/spells/basic_spell.tscn")
 @onready var area_spell = preload("res://scenes/spells/area_spell.tscn")
@@ -28,6 +29,10 @@ func _ready() -> void:
 		health_bar.set_max($PlayerStats.max_health_points)
 		health_bar.set_current($PlayerStats.health_points)
 	apply_dexterity_to_cooldowns()
+	# to make sure player does not start a scene moving
+	target_position = position
+	$AnimationPlayer.stop()
+	stats = $PlayerStats
 
 
 func _process(_delta: float) -> void:

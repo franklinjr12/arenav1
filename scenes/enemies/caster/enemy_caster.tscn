@@ -131,3 +131,5 @@ libraries = {
 }
 
 [node name="EnemyStats" parent="." instance=ExtResource("5_yuyur")]
+experience_drop = 2
+health_points = 7.0

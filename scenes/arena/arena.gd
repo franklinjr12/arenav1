@@ -116,16 +116,20 @@ func reset_enemies():
 	for e in enemies:
 		e.free()
 	if difficulty == "":
-		difficulty = "easy"
-	var selection: Array = enemies_difficulty.enemies_spawn[difficulty]
-	var spawn_counter: int = 1
-	for s in selection:
-		var n = get_node_or_null("EnemySpawn"+str(spawn_counter))
-		if n != null:
-			var enemy = s.instantiate()
-			enemy.position = n.position
-			add_child(enemy)
-			spawn_counter += 1
+		difficulty = "easy" # setting a default value
+	var enemies_setup: Dictionary = enemies_difficulty.get_enemies_spawn_setup()
+	var selection: Array = enemies_setup[difficulty]["enemy_pool"]
+	var min_spawn: int = enemies_setup[difficulty]["min_spawn"]
+	var max_spawn: int = enemies_setup[difficulty]["max_spawn"]
+	var amount_to_spawn: int = randi_range(min_spawn, max_spawn)
+	var spawn_position_nodes: Array[Node] = $EnemiesSpawn.get_children()
+	for i in range(amount_to_spawn):
+		var n: Node2D = spawn_position_nodes.pick_random()
+		spawn_position_nodes.erase(n)
+		var s = selection.pick_random()
+		var enemy = s.instantiate()
+		enemy.position = n.position
+		add_child(enemy)
 	connect_enemies()
 
 
