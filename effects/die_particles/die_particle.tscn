@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://7kbt25wvwuhc"]
+
+[ext_resource type="Script" uid="uid://by2im7i8sswi6" path="res://effects/die_particles/die_particle.gd" id="1_m76ty"]
+
+[node name="DieParticle" type="Node2D"]
+script = ExtResource("1_m76ty")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.5
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 5)
+direction = Vector2(5, 0)
+spread = 180.0
+gravity = Vector2(0, 40)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+color = Color(1, 1, 1, 0.729)
+
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]

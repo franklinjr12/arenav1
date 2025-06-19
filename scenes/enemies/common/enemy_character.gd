@@ -10,6 +10,7 @@ enum State {IDLE, CHASING, ATTACKING}
 @export var stats: EnemyStats
 
 @onready var experience_orb_scene: PackedScene = preload("res://scenes/experience_orb/experience_orb.tscn")
+@onready var die_particle_scene: PackedScene = preload("res://effects/die_particles/die_particle.tscn")
 
 var last_player_position: Vector2 = Vector2.ZERO
 var current_state: State
@@ -96,14 +97,22 @@ func suffer_damage(number: int):
 	$EnemyStats.health_points -= number
 	damaged.emit(number)
 	if $EnemyStats.health_points <= 0:
-		var signal_param = {
-			"experience": $EnemyStats.experience_drop,
-			"gold": $EnemyStats.gold_drop
-		}
-		died.emit(signal_param)
-		var experience_orb = experience_orb_scene.instantiate()
-		experience_orb.position = position
-		experience_orb.set_dropped_experience($EnemyStats.experience_drop)
-		get_tree().get_first_node_in_group("Arena").add_child(experience_orb)
-		queue_free()
+		die()
 	$HealthBar.set_current($EnemyStats.health_points)
+
+
+func die() -> void:
+	var signal_param = {
+		"experience": $EnemyStats.experience_drop,
+		"gold": $EnemyStats.gold_drop
+	}
+	died.emit(signal_param)
+	var experience_orb = experience_orb_scene.instantiate()
+	experience_orb.position = position
+	experience_orb.set_dropped_experience($EnemyStats.experience_drop)
+	var die_particle: DieParticle = die_particle_scene.instantiate()
+	die_particle.position = position
+	die_particle.sprite_size = $Sprite2D.get_rect().size
+	get_tree().get_first_node_in_group("Arena").add_child(experience_orb)
+	get_tree().get_first_node_in_group("Arena").add_child(die_particle)
+	queue_free()

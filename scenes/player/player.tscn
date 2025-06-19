@@ -90,5 +90,6 @@ one_shot = true
 health_points = 20
 max_health_points = 20
 damage_multiplier = 1.0
+intelligence = 100
 
 [connection signal="timeout" from="EActionTimer" to="." method="_on_e_action_timer_timeout"]
