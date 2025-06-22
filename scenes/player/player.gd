@@ -13,6 +13,7 @@ signal health_changed
 
 @onready var basic_spell = preload("res://scenes/spells/basic_spell.tscn")
 @onready var area_spell = preload("res://scenes/spells/area_spell.tscn")
+@onready var blink_particles = preload("res://effects/blink_particles/blink_particles.tscn")
 
 var target_position: Vector2 = Vector2.ZERO
 var position_threshold: int = 20
@@ -54,6 +55,7 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if should_blink:
 		should_blink = false
+		trigger_blink()
 		var mouse_pos = get_global_mouse_position()
 		position += (mouse_pos - position).normalized() * blink_distance
 		# zeroing the speed after blink to avoid movement issues
@@ -135,6 +137,15 @@ func suffer_damage(number: int):
 	if $PlayerStats.health_points <= 0:
 		died.emit()
 
+
+func trigger_blink() -> void:
+	var blink_particles_inst = blink_particles.instantiate()
+	blink_particles_inst.position = position
+	get_tree().get_first_node_in_group("Arena").add_child(blink_particles_inst)
+	var blink_ui: PlayerSpellButton = get_tree().get_first_node_in_group("PlayerBlink")
+	if blink_ui != null:
+		blink_ui.set_wait_time($BlinkTimer.wait_time)
+		blink_ui.start_cooldown()
 
 func trigger_spell_cooldown(spell: String):
 	var spell_ui: PlayerSpellButton = get_tree().get_first_node_in_group("PlayerSpellButton" + spell)

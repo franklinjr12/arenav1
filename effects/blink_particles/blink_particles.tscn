@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://baqi3ohtcnrrk"]
+
+[ext_resource type="Script" uid="uid://fs3v0fwe0xt2" path="res://effects/blink_particles/blink_particles.gd" id="1_jy12c"]
+
+[node name="BlinkParticles" type="Node2D"]
+script = ExtResource("1_jy12c")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 100
+lifetime = 0.2
+explosiveness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+color = Color(0.441836, 0.610405, 0.970049, 1)
+
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]

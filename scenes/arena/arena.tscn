@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3dsqwya6cp26"]
+[gd_scene load_steps=9 format=3 uid="uid://c3dsqwya6cp26"]
 
 [ext_resource type="Script" uid="uid://cgkiqcc8cwnhb" path="res://scenes/arena/arena.gd" id="1_41jku"]
 [ext_resource type="Resource" uid="uid://m5q3ny3cxbdf" path="res://scenes/arena/enemies_difficulty/enemies_difficulty.tres" id="2_2ml6w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://pxj1q1yp6uq1" path="res://sprites/arenav1.png" id="3_xgbxb"]
 [ext_resource type="PackedScene" uid="uid://biufh30s7k4is" path="res://scenes/player_spells_ui.tscn" id="4_8vbsj"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="5_xsx6r"]
+[ext_resource type="PackedScene" uid="uid://c35yh1phfp4ae" path="res://scenes/player_spell_button/player_spell_button.tscn" id="7_u52cf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xgbxb"]
 size = Vector2(328, 248)
@@ -156,6 +157,12 @@ offset_top = -149.0
 offset_right = 52.0
 offset_bottom = -126.0
 text = "000"
+
+[node name="PlayerBlink" parent="ArenaCamera/ArenaCombatUi" groups=["PlayerBlink"] instance=ExtResource("7_u52cf")]
+offset_left = -176.0
+offset_top = 117.0
+offset_right = -136.0
+offset_bottom = 157.0
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2(188, 283)
