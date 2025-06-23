@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2lm61xelodvq"]
+[gd_scene load_steps=5 format=3 uid="uid://d2lm61xelodvq"]
 
 [ext_resource type="Script" uid="uid://b8uii78ps81kw" path="res://scenes/spells/common/projectile_spell.gd" id="1_u7od8"]
 [ext_resource type="Texture2D" uid="uid://fgg037qcnqaw" path="res://scenes/spells/fireball/fireball.png" id="2_8tgcx"]
+[ext_resource type="PackedScene" uid="uid://w8n365bi7ptd" path="res://effects/damage_over_time/damage_over_time.tscn" id="3_8tgcx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lks56"]
 radius = 5.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_u7od8")
+base_damage = 1
+speed_mag = 80
 knockback_strenght = 100
 
 [node name="LifetimeTimer" type="Timer" parent="."]
@@ -29,5 +32,10 @@ gravity = Vector2(0, -10)
 initial_velocity_min = 10.0
 initial_velocity_max = 10.0
 color = Color(0.995367, 0.352489, 0.285834, 1)
+
+[node name="DamageOverTime" parent="." instance=ExtResource("3_8tgcx")]
+tick_time = 0.99
+duration_time = 2.0
+damage = 2.0
 
 [connection signal="body_entered" from="Area2D" to="Sprite2D" method="_on_area_2d_body_entered"]

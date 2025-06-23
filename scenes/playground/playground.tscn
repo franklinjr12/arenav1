@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cduvkk7wx0c6b"]
+[gd_scene load_steps=5 format=3 uid="uid://cduvkk7wx0c6b"]
 
 [ext_resource type="Script" uid="uid://c6ujwa48tf3a0" path="res://scenes/playground/playground.gd" id="1_sgctp"]
 [ext_resource type="PackedScene" uid="uid://bh7ryb0mb3rh0" path="res://scenes/player/player.tscn" id="2_1ro2l"]
 [ext_resource type="PackedScene" uid="uid://dxb17qgwkfuqi" path="res://scenes/enemies/brawler/enemy_brawler.tscn" id="3_51ujy"]
+[ext_resource type="PackedScene" uid="uid://r3m0cdc7ro1x" path="res://scenes/enemies/caster/enemy_caster.tscn" id="4_51ujy"]
 
 [node name="Playground" type="Node2D" groups=["Arena"]]
 script = ExtResource("1_sgctp")
 
 [node name="Player" parent="." instance=ExtResource("2_1ro2l")]
-position = Vector2(70, 96)
+position = Vector2(439, 447)
 
 [node name="EnemyBrawler" parent="." instance=ExtResource("3_51ujy")]
-position = Vector2(135, 96)
+position = Vector2(638, 83)
+
+[node name="EnemyCaster" parent="." instance=ExtResource("4_51ujy")]
+position = Vector2(636, 454)

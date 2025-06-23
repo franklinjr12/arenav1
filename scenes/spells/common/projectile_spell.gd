@@ -55,12 +55,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if body.has_method("suffer_damage"):
 			body.suffer_damage(base_damage)
 			spawn_damage_number()
+			var dot = get_node_or_null("DamageOverTime")
+			if dot != null:
+				body.add_child(dot.duplicate())
 		if knockback_strenght > 0 && body.has_method("suffer_knockback"):
 			var knockback = knockback_scene.instantiate()
 			knockback.direction = direction
 			knockback.strenght = knockback_strenght
 			body.add_child(knockback)
-			#body.suffer_knockback(direction, knockback_strenght)
 		queue_free()
 
 

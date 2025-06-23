@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://w8n365bi7ptd"]
+
+[ext_resource type="Script" uid="uid://mwdle0gxythy" path="res://effects/damage_over_time/damage_over_time.gd" id="1_c1i4l"]
+
+[node name="DamageOverTime" type="Node"]
+script = ExtResource("1_c1i4l")
+
+[node name="TickTimer" type="Timer" parent="."]
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]
+[connection signal="timeout" from="LifetimeTimer" to="." method="_on_lifetime_timer_timeout"]
