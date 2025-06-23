@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://r3m0cdc7ro1x"]
 
 [ext_resource type="Script" uid="uid://bbcsggrjlncfa" path="res://scenes/enemies/common/enemy_character.gd" id="1_eihqj"]
-[ext_resource type="PackedScene" uid="uid://cucjmlobwmxl3" path="res://scenes/spells/basic_spell.tscn" id="2_ilovg"]
+[ext_resource type="PackedScene" uid="uid://d2lm61xelodvq" path="res://scenes/spells/fireball/fireball.tscn" id="2_q2ug0"]
 [ext_resource type="PackedScene" uid="uid://b14khyssldpgk" path="res://scenes/health_bar.tscn" id="3_5ixot"]
 [ext_resource type="Texture2D" uid="uid://ty044752ep0m" path="res://scenes/enemies/caster/caster2.png" id="3_q2ug0"]
 [ext_resource type="PackedScene" uid="uid://c5xeltgbeoosb" path="res://shaders/sprite_flasher.tscn" id="4_eihqj"]
@@ -105,7 +105,7 @@ _data = {
 [node name="EnemyCaster" type="CharacterBody2D" groups=["Enemy"]]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_eihqj")
-spell = ExtResource("2_ilovg")
+spell = ExtResource("2_q2ug0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3.31, 3.31)
