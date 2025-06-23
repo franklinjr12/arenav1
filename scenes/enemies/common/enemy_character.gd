@@ -16,6 +16,7 @@ var last_player_position: Vector2 = Vector2.ZERO
 var current_state: State
 var should_chase: bool = false
 var should_attack: bool = false
+var knockback: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	current_state = State.IDLE
@@ -38,13 +39,16 @@ func _physics_process(delta: float) -> void:
 	if should_chase:
 		var player: Player = get_player()
 		if player != null:
-			var distance = player.position - position
+			var distance: Vector2 = player.position - position
 			velocity = distance.normalized() * $EnemyStats.speed_multiplier * delta
 			$AnimationPlayer.play("enemy_move_animation")
 	else:
 		velocity = Vector2.ZERO
 		if $AnimationPlayer.current_animation == "enemy_move_animation":
 			$AnimationPlayer.stop()
+	if knockback.x != 0 || knockback.y != 0:
+		velocity += knockback
+		knockback = Vector2.ZERO
 	move_and_slide()
 
 
@@ -69,28 +73,30 @@ func get_player() -> Player:
 
 func run_state_machine() -> void:
 	var player: Player = get_player()
-	if player != null:
-		var distance = player.position - position
-		var distance_length = distance.length()
-		last_player_position = position + distance
-		match current_state:
-			State.IDLE:
-				if distance_length < $EnemyStats.chase_range:
-					current_state = State.CHASING
-					should_chase = true
-			State.CHASING:
-				if distance_length <= $EnemyStats.attack_range && can_attack():
-					current_state = State.ATTACKING
-					should_chase = false
-				elif distance_length > $EnemyStats.chase_range:
-					current_state = State.IDLE
-					should_chase = false
-			State.ATTACKING:
-				if can_attack():
-					should_attack = true
-				if distance_length > $EnemyStats.attack_range:
-					current_state = State.CHASING
-					should_chase = true
+	if player == null:
+		return
+	var distance = player.position - position
+	var distance_length = distance.length()
+	last_player_position = position + distance
+	match current_state:
+		State.IDLE:
+			if distance_length < $EnemyStats.chase_range:
+				current_state = State.CHASING
+				should_chase = true
+		State.CHASING:
+			if distance_length <= $EnemyStats.attack_range && can_attack():
+				current_state = State.ATTACKING
+				should_chase = false
+			elif distance_length > $EnemyStats.chase_range:
+				current_state = State.IDLE
+				should_chase = false
+		State.ATTACKING:
+			if can_attack():
+				should_attack = true
+			elif distance_length > $EnemyStats.attack_range:
+				current_state = State.CHASING
+				should_chase = true
+
 
 func suffer_damage(number: int):
 	$SpriteFlasher.flash()
@@ -99,6 +105,10 @@ func suffer_damage(number: int):
 	if $EnemyStats.health_points <= 0:
 		die()
 	$HealthBar.set_current($EnemyStats.health_points)
+
+
+func suffer_knockback(direction, strenght) -> void:
+	knockback += direction * strenght
 
 
 func die() -> void:

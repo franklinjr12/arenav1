@@ -3,8 +3,10 @@ class_name ProjectileSpell
 
 @export var base_damage: int = 2
 @export var speed_mag = 100
+@export var knockback_strenght: int = 0
 
 @onready var damage_number_scene: PackedScene = preload("res://scenes/damage_number/damage_number.tscn")
+@onready var knockback_scene: PackedScene = preload("res://effects/knockback/knockback.tscn")
 
 var velocity : Vector2 = Vector2.ZERO
 var direction : Vector2 = Vector2.ZERO
@@ -53,6 +55,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if body.has_method("suffer_damage"):
 			body.suffer_damage(base_damage)
 			spawn_damage_number()
+		if knockback_strenght > 0 && body.has_method("suffer_knockback"):
+			var knockback = knockback_scene.instantiate()
+			knockback.direction = direction
+			knockback.strenght = knockback_strenght
+			body.add_child(knockback)
+			#body.suffer_knockback(direction, knockback_strenght)
 		queue_free()
 
 

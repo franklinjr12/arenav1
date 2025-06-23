@@ -43,6 +43,7 @@ func connect_player():
 func connect_enemies():
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	current_enemies_count = enemies.size()
+	print("enemies count %d" % current_enemies_count)
 	for e in enemies:
 		if !e.died.is_connected(on_enemies_died):
 			e.died.connect(on_enemies_died)
@@ -122,6 +123,7 @@ func reset_enemies():
 	var min_spawn: int = enemies_setup[difficulty]["min_spawn"]
 	var max_spawn: int = enemies_setup[difficulty]["max_spawn"]
 	var amount_to_spawn: int = randi_range(min_spawn, max_spawn)
+	print("spawned %d enemies" % amount_to_spawn)
 	var spawn_position_nodes: Array[Node] = $EnemiesSpawn.get_children()
 	for i in range(amount_to_spawn):
 		var n: Node2D = spawn_position_nodes.pick_random()
@@ -158,6 +160,7 @@ func on_enemies_died(param: Dictionary):
 			var drop_gold: int = param["gold"]
 			gold_to_gain += drop_gold
 	current_enemies_count -= 1
+	print("current enemies count %d" % current_enemies_count)
 	kills += 1
 	if current_enemies_count == 0:
 		show_arena_end()

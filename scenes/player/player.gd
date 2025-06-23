@@ -57,6 +57,7 @@ func _physics_process(delta: float) -> void:
 		should_blink = false
 		trigger_blink()
 		var mouse_pos = get_global_mouse_position()
+		# var mouse_pos = get_local_mouse_position()
 		position += (mouse_pos - position).normalized() * blink_distance
 		# zeroing the speed after blink to avoid movement issues
 		velocity = Vector2.ZERO
@@ -146,6 +147,7 @@ func trigger_blink() -> void:
 	if blink_ui != null:
 		blink_ui.set_wait_time($BlinkTimer.wait_time)
 		blink_ui.start_cooldown()
+
 
 func trigger_spell_cooldown(spell: String):
 	var spell_ui: PlayerSpellButton = get_tree().get_first_node_in_group("PlayerSpellButton" + spell)
