@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bld02uwk664b3"]
+
+[ext_resource type="Script" uid="uid://dht6tpju6qasx" path="res://effects/slow/slow.gd" id="1_81v53"]
+
+[node name="Slow" type="Node"]
+script = ExtResource("1_81v53")

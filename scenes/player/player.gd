@@ -11,8 +11,9 @@ signal health_changed
 @export var player_distance = 20
 @export var stats: PlayerStats
 
-#@onready var basic_spell = preload("res://scenes/spells/basic_spell.tscn")
-@onready var basic_spell = preload("res://scenes/spells/fireball/fireball.tscn")
+# @onready var basic_spell = preload("res://scenes/spells/basic_spell.tscn")
+# @onready var basic_spell = preload("res://scenes/spells/fireball/fireball.tscn")
+@onready var basic_spell = preload("res://scenes/spells/ice_cone/ice_cone.tscn")
 @onready var area_spell = preload("res://scenes/spells/area_spell.tscn")
 @onready var blink_particles = preload("res://effects/blink_particles/blink_particles.tscn")
 
