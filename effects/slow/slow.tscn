@@ -4,3 +4,5 @@
 
 [node name="Slow" type="Node"]
 script = ExtResource("1_81v53")
+
+[node name="Timer" type="Timer" parent="."]

@@ -1,16 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://pq3ppat6ouxj"]
+[gd_scene load_steps=5 format=3 uid="uid://pq3ppat6ouxj"]
 
 [ext_resource type="Script" uid="uid://b8uii78ps81kw" path="res://scenes/spells/common/projectile_spell.gd" id="1_exnnq"]
 [ext_resource type="Texture2D" uid="uid://drutsfpb4cuem" path="res://scenes/spells/ice_cone/ice_conel.png" id="2_88q04"]
+[ext_resource type="Resource" uid="uid://h7cbvo6yqubo" path="res://effects/slow/slow_effects.tres" id="2_gh3fk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gh3fk"]
 height = 34.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_exnnq")
-base_damage = 3
+base_damage = 1
 speed_mag = 1
-knockback_strenght = 300
+effects = ExtResource("2_gh3fk")
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 wait_time = 0.5

@@ -17,6 +17,7 @@ var current_state: State
 var should_chase: bool = false
 var should_attack: bool = false
 var knockback: Vector2 = Vector2.ZERO
+var slow_percentage: int = 0
 
 func _ready() -> void:
 	current_state = State.IDLE
@@ -46,6 +47,11 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		if $AnimationPlayer.current_animation == "enemy_move_animation":
 			$AnimationPlayer.stop()
+	if slow_percentage != 0 && velocity != Vector2.ZERO:
+		if slow_percentage > 100:
+			slow_percentage = 100
+		velocity = velocity * (100.0 - slow_percentage) / 100.0
+		slow_percentage = 0
 	if knockback.x != 0 || knockback.y != 0:
 		velocity += knockback
 		knockback = Vector2.ZERO
@@ -107,8 +113,12 @@ func suffer_damage(number: int):
 	$HealthBar.set_current($EnemyStats.health_points)
 
 
-func suffer_knockback(direction, strenght) -> void:
-	knockback += direction * strenght
+func suffer_knockback(direction, strength) -> void:
+	knockback += direction * strength
+
+
+func suffer_slow(percentage: int) -> void:
+	slow_percentage += percentage
 
 
 func die() -> void:

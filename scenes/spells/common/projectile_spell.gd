@@ -3,7 +3,8 @@ class_name ProjectileSpell
 
 @export var base_damage: int = 2
 @export var speed_mag = 100
-@export var knockback_strenght: int = 0
+@export var knockback_strength: int = 0
+@export var effects: Resource
 
 @onready var damage_number_scene: PackedScene = preload("res://scenes/damage_number/damage_number.tscn")
 @onready var knockback_scene: PackedScene = preload("res://effects/knockback/knockback.tscn")
@@ -52,17 +53,26 @@ func spawn_damage_number() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body != who_casted:
+		# apply damage
 		if body.has_method("suffer_damage"):
 			body.suffer_damage(base_damage)
 			spawn_damage_number()
 			var dot = get_node_or_null("DamageOverTime")
 			if dot != null:
 				body.add_child(dot.duplicate())
-		if knockback_strenght > 0 && body.has_method("suffer_knockback"):
+		# apply knockback
+		if knockback_strength > 0 && body.has_method("suffer_knockback"):
 			var knockback = knockback_scene.instantiate()
 			knockback.direction = direction
-			knockback.strenght = knockback_strenght
+			knockback.strength = knockback_strength
 			body.add_child(knockback)
+		# apply effects
+		if effects != null:
+			for effect in effects.data:
+				var effect_inst: Node = effect["scene"].instantiate()
+				for key in effect["scene_values"]:
+					effect_inst.set(key, effect["scene_values"][key])
+				body.add_child(effect_inst)
 		queue_free()
 
 
