@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dow3s4er0lcge"]
+
+[ext_resource type="Script" uid="uid://b8uii78ps81kw" path="res://scenes/spells/common/projectile_spell.gd" id="1_w1phw"]
+[ext_resource type="Resource" uid="uid://h7cbvo6yqubo" path="res://effects/slow/slow_effects.tres" id="2_mtqol"]
+[ext_resource type="Texture2D" uid="uid://dmj8f8n5lor8p" path="res://scenes/spells/bolt/bolt_spell.png" id="3_47vyi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gh3fk"]
+radius = 3.0
+height = 12.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_w1phw")
+base_damage = 1
+speed_mag = 500
+effects = ExtResource("2_mtqol")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gh3fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_47vyi")
+
+[connection signal="body_entered" from="Area2D" to="Sprite2D" method="_on_area_2d_body_entered"]
