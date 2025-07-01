@@ -24,30 +24,37 @@ offset_right = 88.5
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "You completed 0 fights"
+horizontal_alignment = 1
 
 [node name="TotalTimeLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Total fight time 0"
+horizontal_alignment = 1
 
 [node name="TotalKillsLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Total kills 0"
+horizontal_alignment = 1
 
 [node name="TotalDamageGivenLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Total damage taken 0"
+horizontal_alignment = 1
 
 [node name="TotalDamageTakenLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Total damage given 0"
+horizontal_alignment = 1
 
 [node name="TotalArenasLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Total arenas 0"
+horizontal_alignment = 1
 
 [node name="ResultsLabel" type="Label" parent="VBoxContainer"]
 visible = false
@@ -57,10 +64,12 @@ horizontal_alignment = 1
 [node name="TotalExperience" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Total experience 0"
+horizontal_alignment = 1
 
 [node name="TotalGold" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Total gold 0"
+horizontal_alignment = 1
 
 [node name="ContinueButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2

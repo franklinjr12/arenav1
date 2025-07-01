@@ -5,6 +5,8 @@ class_name ProjectileSpell
 @export var speed_mag = 100
 @export var knockback_strength: int = 0
 @export var effects: Resource
+@export var gold_cost: int = 10
+@export var base_cooldown: float = 1.0
 
 @onready var damage_number_scene: PackedScene = preload("res://scenes/damage_number/damage_number.tscn")
 @onready var knockback_scene: PackedScene = preload("res://effects/knockback/knockback.tscn")

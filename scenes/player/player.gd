@@ -11,10 +11,10 @@ signal health_changed
 @export var player_distance = 20
 @export var stats: PlayerStats
 
-# @onready var basic_spell = preload("res://scenes/spells/basic_spell.tscn")
+@onready var basic_spell = preload("res://scenes/spells/basic_spell.tscn")
 # @onready var basic_spell = preload("res://scenes/spells/fireball/fireball.tscn")
 # @onready var basic_spell = preload("res://scenes/spells/ice_cone/ice_cone.tscn")
-@onready var basic_spell = preload("res://scenes/spells/bolt/bolt.tscn")
+# @onready var basic_spell = preload("res://scenes/spells/bolt/bolt.tscn")
 @onready var area_spell = preload("res://scenes/spells/area_spell.tscn")
 @onready var blink_particles = preload("res://effects/blink_particles/blink_particles.tscn")
 
@@ -199,6 +199,7 @@ func trigger_action_e(_direction: Vector2):
 		shield_on = true
 		trigger_spell_cooldown("E")
 		$EActionTimer.start()
+
 
 func trigger_action_r(_direction: Vector2):
 	if $RActionTimer.is_stopped():
