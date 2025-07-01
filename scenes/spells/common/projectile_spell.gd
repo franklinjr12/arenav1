@@ -34,6 +34,7 @@ func set_direction(_direction: Vector2):
 	else:
 		direction = _direction.normalized()
 		velocity = direction
+	rotation = direction.angle()
 
 
 func set_caster(caster):
