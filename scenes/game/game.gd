@@ -61,6 +61,12 @@ func create_fights_completed_screen() -> void:
 	player.gain_gold(fights_completed.total_gold)
 
 
+func create_spell_shop_screen() -> void:
+	var scene: PackedScene = load("res://scenes/spell_shop/spell_shop.tscn")
+	var node = scene.instantiate()
+	add_child(node)
+
+
 func create_player_character_screen() -> void:
 	var scene: PackedScene = load("res://scenes/player_character_screen/player_character_screen.tscn")
 	var node = scene.instantiate()

@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbnjutqx1voeg"]
+
+[ext_resource type="Script" uid="uid://drltbpjr0aohf" path="res://scenes/scroll/scroll.gd" id="1_vntjg"]
+[ext_resource type="PackedScene" uid="uid://dow3s4er0lcge" path="res://scenes/spells/bolt/bolt.tscn" id="2_76ty3"]
+[ext_resource type="Texture2D" uid="uid://cw05j4v502id" path="res://scenes/scroll/scroll.png" id="2_jrcnc"]
+
+[node name="Scroll" type="Control"]
+custom_minimum_size = Vector2(128, 97)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -623.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vntjg")
+spell = ExtResource("2_76ty3")
+gold_cost = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(62, 48)
+texture = ExtResource("2_jrcnc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 7.0
+offset_right = 115.0
+offset_bottom = 67.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 69.0
+offset_right = 82.0
+offset_bottom = 92.0
+text = "10"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 126.0
+offset_bottom = 94.0
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

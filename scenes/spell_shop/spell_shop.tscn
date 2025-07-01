@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr0te0iketa7w"]
+
+[ext_resource type="Script" uid="uid://c6xnh7t27rdxb" path="res://scenes/spell_shop/spell_shop.gd" id="1_iaf12"]
+[ext_resource type="Texture2D" uid="uid://l5bi03ubcj3s" path="res://scenes/spell_shop/spell_shop_background.png" id="2_cbylo"]
+[ext_resource type="PackedScene" uid="uid://cbnjutqx1voeg" path="res://scenes/scroll/scroll.tscn" id="3_bewlw"]
+[ext_resource type="PackedScene" uid="uid://d2lm61xelodvq" path="res://scenes/spells/fireball/fireball.tscn" id="4_60x2c"]
+[ext_resource type="PackedScene" uid="uid://pq3ppat6ouxj" path="res://scenes/spells/ice_cone/ice_cone.tscn" id="5_ed2ok"]
+
+[node name="SpellShop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iaf12")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(640.5, 359.5)
+scale = Vector2(6.395, 3.575)
+texture = ExtResource("2_cbylo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 297.0
+offset_right = 915.0
+offset_bottom = 427.0
+alignment = 1
+
+[node name="Scroll" parent="HBoxContainer" instance=ExtResource("3_bewlw")]
+layout_mode = 2
+gold_cost = 20
+
+[node name="Scroll2" parent="HBoxContainer" instance=ExtResource("3_bewlw")]
+layout_mode = 2
+spell = ExtResource("4_60x2c")
+gold_cost = 30
+
+[node name="Scroll3" parent="HBoxContainer" instance=ExtResource("3_bewlw")]
+layout_mode = 2
+spell = ExtResource("5_ed2ok")
+gold_cost = 40
+
+[connection signal="pressed" from="HBoxContainer/Scroll" to="." method="_on_scroll_pressed"]
+[connection signal="pressed" from="HBoxContainer/Scroll2" to="." method="_on_scroll_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/Scroll3" to="." method="_on_scroll_3_pressed"]

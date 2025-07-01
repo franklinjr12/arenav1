@@ -24,6 +24,7 @@ var should_blink = false
 var blink_distance = 100
 var shield_on = false
 var is_invulnerable: bool = false
+var acquired_spells: Array[PackedScene]
 
 const base_blink_cooldown = 2.0
 
@@ -74,6 +75,11 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		$AnimationPlayer.stop()
 	move_and_slide()
+
+
+func add_spell(spell: PackedScene) -> void:
+	acquired_spells.append(spell)
+	print(acquired_spells)
 
 
 func apply_dexterity_to_cooldowns() -> void:

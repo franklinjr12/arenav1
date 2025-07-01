@@ -47,4 +47,5 @@ text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/ArenaButton" to="." method="_on_arena_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CharacterSheetButton" to="." method="_on_character_sheet_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SpellShopButton" to="." method="_on_spell_shop_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
