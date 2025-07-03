@@ -9,10 +9,10 @@
 script = ExtResource("1_sgctp")
 
 [node name="Player" parent="." instance=ExtResource("2_1ro2l")]
-position = Vector2(439, 447)
+position = Vector2(238, 321)
 
 [node name="EnemyBrawler" parent="." instance=ExtResource("3_51ujy")]
-position = Vector2(638, 83)
+position = Vector2(1039, 169)
 
 [node name="EnemyCaster" parent="." instance=ExtResource("4_51ujy")]
-position = Vector2(636, 454)
+position = Vector2(1043, 501)

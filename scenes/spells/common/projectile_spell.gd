@@ -7,6 +7,10 @@ class_name ProjectileSpell
 @export var effects: Resource
 @export var gold_cost: int = 10
 @export var base_cooldown: float = 1.0
+@export var spell_name: String
+@export var spawn_multiple: bool = false
+@export var spawn_amount: int = 0
+@export var spawn_angle: float = 0
 
 @onready var damage_number_scene: PackedScene = preload("res://scenes/damage_number/damage_number.tscn")
 @onready var knockback_scene: PackedScene = preload("res://effects/knockback/knockback.tscn")
@@ -19,9 +23,13 @@ func _ready() -> void:
 	var t: Timer = get_node_or_null("LifetimeTimer")
 	if t != null:
 		t.timeout.connect(_on_timer_timeout)
+		t.autostart = true
 	var area: Area2D = get_node_or_null("Area2D")
 	if area != null:
 		area.body_entered.connect(_on_area_2d_body_entered)
+	if spawn_multiple && spawn_amount > 1:
+		spawn_multiple = false # workaround for avoiding recursion
+		spawn_clones()
 
 
 func _physics_process(delta: float) -> void:
@@ -45,6 +53,22 @@ func set_caster(caster):
 
 func set_lifetime(time: float):
 	$LifetimeTimer.wait_time = time
+
+
+func spawn_clones() -> void:
+	var angle: float = deg_to_rad(spawn_angle)
+	for i in range(-round(spawn_amount/2),round(spawn_amount/2) + 1):
+		if i == 0:
+			continue # already instantiated by the player on cast
+		var new_inst = self.duplicate()
+		var new_direction: Vector2 = direction
+		new_direction = new_direction.rotated(angle * i)
+		new_inst.set_direction(new_direction)
+		new_inst.set_caster(who_casted)
+		new_inst.set_lifetime($LifetimeTimer.wait_time)
+		new_inst.position.y += $Sprite2D.get_rect().size.y * 1.2 * i
+		new_inst.base_damage = base_damage
+		get_parent().add_child(new_inst)
 
 
 func spawn_damage_number() -> void:

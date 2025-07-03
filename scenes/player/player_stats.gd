@@ -14,7 +14,7 @@ signal levelled_up
 @export var dexterity: int = 1 # affects cooldowns
 @export var swiftness: int = 1 # affects move speed
 @export var vitality: int = 1 # affects health
-@export var luck: int = 1 # affects exp gain
+@export var luck: int = 1 # affects exp/gold gain
 
 const base_level_up: int = 10
 const max_attribute_value: int = 10

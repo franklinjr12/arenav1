@@ -15,6 +15,7 @@ signal health_changed
 # @onready var basic_spell = preload("res://scenes/spells/fireball/fireball.tscn")
 # @onready var basic_spell = preload("res://scenes/spells/ice_cone/ice_cone.tscn")
 # @onready var basic_spell = preload("res://scenes/spells/bolt/bolt.tscn")
+@onready var three_shot_spell = preload("res://scenes/spells/three_shot/three_shot.tscn")
 @onready var area_spell = preload("res://scenes/spells/area_spell.tscn")
 @onready var blink_particles = preload("res://effects/blink_particles/blink_particles.tscn")
 
@@ -179,17 +180,12 @@ func trigger_action_q(direction: Vector2):
 
 func trigger_action_w(direction: Vector2):
 	if $WActionTimer.is_stopped():
-		var angle: float = deg_to_rad(30)
-		var lifetime = 0.5
-		for i in [-1,0,1]:
-			var direction_rotation = Vector2(direction.x*cos(angle*i) - direction.y*sin(angle*i),
-											direction.x*sin(angle*i) + direction.y*cos(angle*i))
-			var action = basic_spell.instantiate()
-			action.position = position + direction_rotation * player_distance
-			action.set_direction(direction_rotation)
-			action.set_caster(self)
-			action.set_lifetime(lifetime)
-			get_tree().get_first_node_in_group("Arena").add_child(action)
+		var action = three_shot_spell.instantiate()
+		action.position = position + direction * player_distance
+		action.base_damage = action.base_damage * $PlayerStats.get_damage_multiplier()
+		action.set_direction(direction)
+		action.set_caster(self)
+		get_tree().get_first_node_in_group("Arena").add_child(action)
 		trigger_spell_cooldown("W")
 		$WActionTimer.start()
 
