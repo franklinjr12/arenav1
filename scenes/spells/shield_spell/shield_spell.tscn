@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cokhidt1dj375"]
+
+[ext_resource type="Script" uid="uid://b8uii78ps81kw" path="res://scenes/spells/common/projectile_spell.gd" id="1_giwk2"]
+[ext_resource type="Resource" uid="uid://h7cbvo6yqubo" path="res://effects/slow/slow_effects.tres" id="2_cf454"]
+[ext_resource type="Texture2D" uid="uid://bl4o0q8daq3q2" path="res://scenes/spells/shield_spell/mirror_shield_spell.png" id="3_x73ic"]
+[ext_resource type="Script" uid="uid://cc2umul4ukltv" path="res://effects/shield/shield_extra_script.gd" id="4_1nfh0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gh3fk"]
+radius = 4.0
+height = 46.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_giwk2")
+base_damage = 0
+speed_mag = 1
+effects = ExtResource("2_cf454")
+spell_name = "Shield"
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_gh3fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_x73ic")
+
+[node name="ExtraScript" type="Node" parent="."]
+script = ExtResource("4_1nfh0")
+
+[connection signal="body_entered" from="Area2D" to="Sprite2D" method="_on_area_2d_body_entered"]

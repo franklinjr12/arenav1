@@ -25,7 +25,9 @@ func _on_tick_timer_timeout() -> void:
 		var damage_number = damage_number_scene.instantiate()
 		damage_number.position = parent.position
 		damage_number.text = str("%d" % damage)
-		get_tree().get_first_node_in_group("Arena").add_child(damage_number)
+		var tree = get_tree()
+		if tree != null:
+			tree.get_first_node_in_group("Arena").add_child(damage_number)
 
 
 func _on_lifetime_timer_timeout() -> void:

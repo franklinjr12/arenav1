@@ -17,7 +17,9 @@ signal health_changed
 # @onready var basic_spell = preload("res://scenes/spells/bolt/bolt.tscn")
 @onready var three_shot_spell = preload("res://scenes/spells/three_shot/three_shot.tscn")
 @onready var area_spell = preload("res://scenes/spells/area_spell.tscn")
+@onready var shield_spell = preload("res://scenes/spells/shield_spell/shield_spell.tscn")
 @onready var blink_particles = preload("res://effects/blink_particles/blink_particles.tscn")
+@onready var yellow_glow_shader = preload("res://scenes/player/yellow_glow.gdshader")
 
 var target_position: Vector2 = Vector2.ZERO
 var position_threshold: int = 20
@@ -78,6 +80,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func activate_shield() -> void:
+	shield_on = true
+	# $Sprite2D.modulate = Color.YELLOW
+	$Sprite2D.material.shader = yellow_glow_shader
+
+
 func add_spell(spell: PackedScene) -> void:
 	acquired_spells.append(spell)
 	print(acquired_spells)
@@ -86,6 +94,12 @@ func add_spell(spell: PackedScene) -> void:
 func apply_dexterity_to_cooldowns() -> void:
 	if $PlayerStats.get_cooldown_reduction() > 0:
 		$BlinkTimer.wait_time = base_blink_cooldown * $PlayerStats.get_cooldown_reduction()
+
+
+func deactivate_shield() -> void:
+	shield_on = false
+	# $Sprite2D.modulate = Color.WHITE
+	$Sprite2D.material.shader = null
 
 
 func gain_experience(points: int) -> void:
@@ -190,9 +204,13 @@ func trigger_action_w(direction: Vector2):
 		$WActionTimer.start()
 
 
-func trigger_action_e(_direction: Vector2):
+func trigger_action_e(direction: Vector2):
 	if $EActionTimer.is_stopped():
-		shield_on = true
+		var action = shield_spell.instantiate()
+		action.position = position + direction * player_distance
+		action.set_direction(direction)
+		action.set_caster(self)
+		get_tree().get_first_node_in_group("Arena").add_child(action)
 		trigger_spell_cooldown("E")
 		$EActionTimer.start()
 
@@ -205,10 +223,6 @@ func trigger_action_r(_direction: Vector2):
 		get_tree().get_first_node_in_group("Arena").add_child(action)
 		trigger_spell_cooldown("R")
 		$RActionTimer.start()
-
-
-func _on_e_action_timer_timeout():
-	shield_on = false
 
 
 func on_level_up():
