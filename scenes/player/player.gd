@@ -21,6 +21,12 @@ signal health_changed
 @onready var blink_particles = preload("res://effects/blink_particles/blink_particles.tscn")
 @onready var yellow_glow_shader = preload("res://scenes/player/yellow_glow.gdshader")
 
+# equipped spells
+@onready var q_action: PackedScene = basic_spell
+@onready var w_action: PackedScene = three_shot_spell
+@onready var e_action: PackedScene = shield_spell
+@onready var r_action: PackedScene = area_spell
+
 var target_position: Vector2 = Vector2.ZERO
 var position_threshold: int = 20
 var should_blink = false
@@ -41,6 +47,7 @@ func _ready() -> void:
 	target_position = position
 	$AnimationPlayer.stop()
 	stats = $PlayerStats
+	set_action_timers()
 
 
 func _process(_delta: float) -> void:
@@ -144,6 +151,29 @@ func loose_gold(amount: int) -> void:
 	gold_changed.emit($PlayerStats.gold)
 
 
+func set_action(key: String, new_action: PackedScene) -> void:
+	match(key.to_upper()):
+		"Q":
+			q_action = new_action
+		"W":
+			w_action = new_action
+		"E":
+			e_action = new_action
+		"R":
+			r_action = new_action
+	set_action_timers()
+
+
+func set_action_timers() -> void:
+	var cdr: float = $PlayerStats.get_cooldown_reduction()
+	if cdr == 0:
+		cdr = 1
+	$QActionTimer.wait_time = q_action.instantiate().base_cooldown * cdr
+	$WActionTimer.wait_time = w_action.instantiate().base_cooldown * cdr
+	$EActionTimer.wait_time = e_action.instantiate().base_cooldown * cdr
+	$RActionTimer.wait_time = r_action.instantiate().base_cooldown * cdr
+
+
 func set_initial_values() -> void:
 	$PlayerStats.health_points = $PlayerStats.max_health_points
 	health_changed.emit($PlayerStats.health_points)
@@ -182,7 +212,7 @@ func trigger_spell_cooldown(spell: String):
 
 func trigger_action_q(direction: Vector2):
 	if $QActionTimer.is_stopped():
-		var action = basic_spell.instantiate()
+		var action = q_action.instantiate()
 		action.position = position + direction * player_distance
 		action.set_direction(direction)
 		action.set_caster(self)
@@ -194,7 +224,7 @@ func trigger_action_q(direction: Vector2):
 
 func trigger_action_w(direction: Vector2):
 	if $WActionTimer.is_stopped():
-		var action = three_shot_spell.instantiate()
+		var action = w_action.instantiate()
 		action.position = position + direction * player_distance
 		action.base_damage = action.base_damage * $PlayerStats.get_damage_multiplier()
 		action.set_direction(direction)
@@ -206,7 +236,7 @@ func trigger_action_w(direction: Vector2):
 
 func trigger_action_e(direction: Vector2):
 	if $EActionTimer.is_stopped():
-		var action = shield_spell.instantiate()
+		var action = e_action.instantiate()
 		action.position = position + direction * player_distance
 		action.set_direction(direction)
 		action.set_caster(self)
@@ -215,10 +245,11 @@ func trigger_action_e(direction: Vector2):
 		$EActionTimer.start()
 
 
-func trigger_action_r(_direction: Vector2):
+func trigger_action_r(direction: Vector2):
 	if $RActionTimer.is_stopped():
-		var action: ProjectileSpell = area_spell.instantiate()
-		action.position = position
+		var action: ProjectileSpell = r_action.instantiate()
+		action.position = position + direction * player_distance
+		action.set_direction(direction)
 		action.set_caster(self)
 		get_tree().get_first_node_in_group("Arena").add_child(action)
 		trigger_spell_cooldown("R")
