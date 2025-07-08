@@ -10,6 +10,7 @@ radius = 5.0
 script = ExtResource("1_ddj3p")
 base_damage = 10
 speed_mag = 0
+spell_name = "Area blast"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(5, 5)

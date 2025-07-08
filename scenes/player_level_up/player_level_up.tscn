@@ -19,6 +19,7 @@ offset_bottom = 40.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+alignment = 2
 
 [node name="Intelligence" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -34,6 +35,7 @@ icon = ExtResource("2_wtcln")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+alignment = 2
 
 [node name="Dexterity" type="Label" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -49,6 +51,7 @@ icon = ExtResource("2_wtcln")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+alignment = 2
 
 [node name="Swiftness" type="Label" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
@@ -64,6 +67,7 @@ icon = ExtResource("2_wtcln")
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+alignment = 2
 
 [node name="Vitality" type="Label" parent="VBoxContainer/HBoxContainer4"]
 layout_mode = 2
@@ -79,6 +83,7 @@ icon = ExtResource("2_wtcln")
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+alignment = 2
 
 [node name="Luck" type="Label" parent="VBoxContainer/HBoxContainer5"]
 layout_mode = 2

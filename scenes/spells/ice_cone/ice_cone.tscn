@@ -12,6 +12,7 @@ script = ExtResource("1_exnnq")
 base_damage = 1
 speed_mag = 1
 effects = ExtResource("2_gh3fk")
+spell_name = "Ice cone"
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 wait_time = 0.5

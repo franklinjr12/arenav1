@@ -8,6 +8,7 @@ radius = 5.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_v54b4")
+spell_name = "Energy blast"
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 wait_time = 5.0

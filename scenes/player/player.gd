@@ -11,6 +11,7 @@ signal health_changed
 @export var player_distance = 20
 @export var stats: PlayerStats
 
+# initial spells
 @onready var basic_spell = preload("res://scenes/spells/basic_spell.tscn")
 # @onready var basic_spell = preload("res://scenes/spells/fireball/fireball.tscn")
 # @onready var basic_spell = preload("res://scenes/spells/ice_cone/ice_cone.tscn")
@@ -18,8 +19,6 @@ signal health_changed
 @onready var three_shot_spell = preload("res://scenes/spells/three_shot/three_shot.tscn")
 @onready var area_spell = preload("res://scenes/spells/area_spell.tscn")
 @onready var shield_spell = preload("res://scenes/spells/shield_spell/shield_spell.tscn")
-@onready var blink_particles = preload("res://effects/blink_particles/blink_particles.tscn")
-@onready var yellow_glow_shader = preload("res://scenes/player/yellow_glow.gdshader")
 
 # equipped spells
 @onready var q_action: PackedScene = basic_spell
@@ -27,15 +26,36 @@ signal health_changed
 @onready var e_action: PackedScene = shield_spell
 @onready var r_action: PackedScene = area_spell
 
+# add initial spells to acquired
+@onready var acquired_spells: Array[PackedScene] = [basic_spell, three_shot_spell, shield_spell, area_spell]
+
+#effects
+@onready var blink_particles = preload("res://effects/blink_particles/blink_particles.tscn")
+@onready var yellow_glow_shader = preload("res://scenes/player/yellow_glow.gdshader")
+
 var target_position: Vector2 = Vector2.ZERO
 var position_threshold: int = 20
 var should_blink = false
 var blink_distance = 100
 var shield_on = false
 var is_invulnerable: bool = false
-var acquired_spells: Array[PackedScene]
 
 const base_blink_cooldown = 2.0
+
+func _init() -> void:
+	# initial spells
+	basic_spell = load("res://scenes/spells/basic_spell.tscn")
+	three_shot_spell = load("res://scenes/spells/three_shot/three_shot.tscn")
+	area_spell = load("res://scenes/spells/area_spell.tscn")
+	shield_spell = load("res://scenes/spells/shield_spell/shield_spell.tscn")
+	# equipped spells
+	q_action = basic_spell
+	w_action = three_shot_spell
+	e_action = shield_spell
+	r_action = area_spell
+	# add initial spells to acquired
+	acquired_spells = [basic_spell, three_shot_spell, shield_spell, area_spell]
+
 
 func _ready() -> void:
 	var health_bar = get_tree().get_first_node_in_group("PlayerHealthBar")

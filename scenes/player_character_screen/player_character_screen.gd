@@ -2,6 +2,8 @@ extends Control
 
 signal continue_pressed
 
+@onready var acquired_skill_button_scene = preload("res://scenes/player_character_screen/acquired_skill_button.tscn")
+
 var player: Player = null
 var level_up_node = null
 
@@ -14,6 +16,11 @@ func _ready() -> void:
 	player.health_changed.connect(on_player_health_changed)
 	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HealPlayerButton.player = player
 	set_labels()
+	var container = $CenterContainer/VBoxContainer/HBoxContainer/AcquiredSpellContainer
+	for spell in player.acquired_spells:
+		var new_button = acquired_skill_button_scene.instantiate()
+		new_button.spell_scene = spell
+		container.add_child(new_button)
 
 
 func set_labels() -> void:
