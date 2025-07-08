@@ -23,6 +23,10 @@ func _ready() -> void:
 		new_button.spell_scene = spell
 		new_button.spell_pressed.connect(_on_acquired_spell_pressed)
 		container.add_child(new_button)
+	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillQ.set_spell_scene(player.get_action("Q"))
+	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillW.set_spell_scene(player.get_action("W"))
+	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillE.set_spell_scene(player.get_action("E"))
+	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillR.set_spell_scene(player.get_action("R"))
 
 
 func _process(delta: float) -> void:
@@ -30,12 +34,16 @@ func _process(delta: float) -> void:
 		return
 	if Input.is_action_pressed("q_action"):
 		player.set_action("Q", pressed_spell)
+		$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillQ.set_spell_scene(pressed_spell)
 	if Input.is_action_pressed("w_action"):
 		player.set_action("W", pressed_spell)
+		$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillW.set_spell_scene(pressed_spell)
 	if Input.is_action_pressed("e_action"):
 		player.set_action("E", pressed_spell)
+		$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillE.set_spell_scene(pressed_spell)
 	if Input.is_action_pressed("r_action"):
 		player.set_action("R", pressed_spell)
+		$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillR.set_spell_scene(pressed_spell)
 
 
 func set_labels() -> void:

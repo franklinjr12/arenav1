@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dk84hjnv6v74i" path="res://scenes/player_character_screen/player_character_screen.gd" id="1_xnuxa"]
 [ext_resource type="PackedScene" uid="uid://bctwxau8k5flx" path="res://scenes/heal_player_button/heal_player_button.tscn" id="2_bkdyp"]
 [ext_resource type="PackedScene" uid="uid://fcgjg5un81xq" path="res://scenes/player_level_up/player_level_up.tscn" id="2_gb37n"]
-[ext_resource type="Texture2D" uid="uid://crgtnk1y6w7w3" path="res://sprites/basic_button_text.png" id="2_gqyka"]
+[ext_resource type="PackedScene" uid="uid://c6bmcy5j1joea" path="res://scenes/player_character_screen/acquired_skill_button.tscn" id="2_rds81"]
 
 [node name="PlayerCharacterScreen" type="Control" groups=["PlayerCharacterScreen"]]
 layout_mode = 3
@@ -69,21 +69,17 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SkillQ" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="SkillQ" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_rds81")]
 layout_mode = 2
-icon = ExtResource("2_gqyka")
 
-[node name="SkillW" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="SkillW" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_rds81")]
 layout_mode = 2
-icon = ExtResource("2_gqyka")
 
-[node name="SkillE" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="SkillE" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_rds81")]
 layout_mode = 2
-icon = ExtResource("2_gqyka")
 
-[node name="SkillR" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="SkillR" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_rds81")]
 layout_mode = 2
-icon = ExtResource("2_gqyka")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2

@@ -133,6 +133,19 @@ func gain_experience(points: int) -> void:
 	$PlayerStats.gain_experience_points(points)
 
 
+func get_action(key: String) -> PackedScene:
+	match(key.to_upper()):
+		"Q":
+			return q_action
+		"W":
+			return w_action
+		"E":
+			return e_action
+		"R":
+			return r_action
+	return null
+
+
 func get_current_health() -> int:
 	return $PlayerStats.health_points
 
