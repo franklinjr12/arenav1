@@ -26,3 +26,5 @@ text = "Projectile"
 label_settings = SubResource("LabelSettings_0ov2r")
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

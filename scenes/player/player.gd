@@ -21,13 +21,13 @@ signal health_changed
 @onready var shield_spell = preload("res://scenes/spells/shield_spell/shield_spell.tscn")
 
 # equipped spells
-@onready var q_action: PackedScene = basic_spell
-@onready var w_action: PackedScene = three_shot_spell
-@onready var e_action: PackedScene = shield_spell
-@onready var r_action: PackedScene = area_spell
+var q_action: PackedScene = null
+var w_action: PackedScene = null
+var e_action: PackedScene = null
+var r_action: PackedScene = null
 
 # add initial spells to acquired
-@onready var acquired_spells: Array[PackedScene] = [basic_spell, three_shot_spell, shield_spell, area_spell]
+var acquired_spells: Array[PackedScene] = []
 
 #effects
 @onready var blink_particles = preload("res://effects/blink_particles/blink_particles.tscn")
