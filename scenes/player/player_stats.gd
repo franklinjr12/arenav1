@@ -24,7 +24,7 @@ var available_attribute_points: int = 0
 
 func gain_experience_points(value: int) -> void:
 	experience_points += value *  (1 + (float(luck - 1) / max_attribute_value))
-	var needed_points = last_experience_points + base_level_up * (level + 1)
+	var needed_points = get_experience_for_next_level()
 	if experience_points > needed_points:
 		last_experience_points = experience_points
 		level += 1
@@ -41,6 +41,10 @@ func get_cooldown_reduction() -> float:
 
 func get_damage_multiplier() -> float:
 	return intelligence * damage_multiplier
+
+
+func get_experience_for_next_level() -> int:
+	return last_experience_points + base_level_up * (level + 1)
 
 
 func get_speed_increase() -> float:
