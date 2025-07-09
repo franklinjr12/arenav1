@@ -1,5 +1,7 @@
 extends Control
 
+signal continue_pressed
+
 var player: Player = null
 
 func _ready() -> void:
@@ -28,3 +30,7 @@ func _on_scroll_2_pressed() -> void:
 
 func _on_scroll_3_pressed() -> void:
 	handle_scroll_clicked($HBoxContainer/Scroll3)
+
+
+func _on_continue_button_pressed() -> void:
+	continue_pressed.emit()

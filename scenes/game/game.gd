@@ -64,6 +64,7 @@ func create_fights_completed_screen() -> void:
 func create_spell_shop_screen() -> void:
 	var scene: PackedScene = load("res://scenes/spell_shop/spell_shop.tscn")
 	var node = scene.instantiate()
+	node.continue_pressed.connect(on_spell_shop_continue_pressed)
 	add_child(node)
 
 
@@ -123,6 +124,13 @@ func on_difficulty_selected(option: String):
 
 func on_player_character_screen_continue_pressed() -> void:
 	var n: Node = get_node_or_null("PlayerCharacterScreen")
+	if n != null:
+		n.queue_free()
+	create_city_menu_screen()
+
+
+func on_spell_shop_continue_pressed() -> void:
+	var n: Node = get_node_or_null("SpellShop")
 	if n != null:
 		n.queue_free()
 	create_city_menu_screen()

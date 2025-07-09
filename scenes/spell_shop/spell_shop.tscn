@@ -42,6 +42,14 @@ layout_mode = 2
 spell = ExtResource("5_ed2ok")
 gold_cost = 40
 
+[node name="ContinueButton" type="Button" parent="."]
+offset_left = 486.0
+offset_top = 618.0
+offset_right = 772.0
+offset_bottom = 649.0
+text = "Continue"
+
 [connection signal="pressed" from="HBoxContainer/Scroll" to="." method="_on_scroll_pressed"]
 [connection signal="pressed" from="HBoxContainer/Scroll2" to="." method="_on_scroll_2_pressed"]
 [connection signal="pressed" from="HBoxContainer/Scroll3" to="." method="_on_scroll_3_pressed"]
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

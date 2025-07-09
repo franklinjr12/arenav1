@@ -115,7 +115,6 @@ func activate_shield() -> void:
 
 func add_spell(spell: PackedScene) -> void:
 	acquired_spells.append(spell)
-	print(acquired_spells)
 
 
 func apply_dexterity_to_cooldowns() -> void:

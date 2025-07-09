@@ -92,4 +92,5 @@ one_shot = true
 [node name="PlayerStats" parent="." instance=ExtResource("4_lvxji")]
 health_points = 20
 max_health_points = 20
+gold = 100
 damage_multiplier = 1.0
