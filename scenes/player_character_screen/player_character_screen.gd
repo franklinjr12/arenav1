@@ -32,6 +32,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if pressed_spell == null:
 		return
+	# TODO should only assign if the spell is not equiped yet
 	if Input.is_action_pressed("q_action"):
 		player.set_action("Q", pressed_spell)
 		$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SkillQ.set_spell_scene(pressed_spell)

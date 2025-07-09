@@ -20,6 +20,15 @@ var enemies_damage_taken: float = 0
 var player_experience_gained: float = 0
 var gold_to_gain: int = 0
 
+const grade_reward_multiplier: Dictionary = {
+	"A": 2.0,
+	"B": 1.5,
+	"C": 1.0,
+	"D": 0.5,
+	"E": 0.25,
+	"F": 0.1
+}
+
 func _ready() -> void:
 	reset_enemies()
 	connect_player()
@@ -73,16 +82,17 @@ func show_arena_end():
 	# TODO add some timer for arena not to end instantaneously
 	var player: Player = get_player()
 	player.is_invulnerable = true
+	var grade = completion_grade()
 	var params: Dictionary = {
 		"result": "defeat" if player_died else "victory",
 		"time": current_arena_time,
-		"grade": completion_grade(),
+		"grade": grade,
 		"difficulty": difficulty,
 		"kills": kills,
 		"player_damage_taken": player_damage_taken,
 		"enemies_damage_taken": enemies_damage_taken,
-		"player_experience_gained": player_experience_gained,
-		"gold": gold_to_gain
+		"player_experience_gained": player_experience_gained * grade_reward_multiplier[grade],
+		"gold": gold_to_gain * grade_reward_multiplier[grade]
 	}
 	combat_ended.emit(params)
 
@@ -175,14 +185,14 @@ func completion_grade() -> String:
 	if player_died:
 		return "F"
 	var time: int = current_arena_time
-	if time < 30:
+	if time < 15:
 		return "A"
-	if time < 60:
+	if time < 30:
 		return "B"
-	if time < 130:
+	if time < 40:
 		return "C"
-	if time < 160:
+	if time < 50:
 		return "D"
-	if time < 190:
+	if time < 60:
 		return "E"
 	return "F"

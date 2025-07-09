@@ -11,7 +11,7 @@ script = ExtResource("1_v54b4")
 spell_name = "Energy blast"
 
 [node name="LifetimeTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.5
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
